@@ -127,10 +127,10 @@ export default function Home() {
 
               <div className="relative z-10">
                 <h1 className="font-headline text-5xl font-bold tracking-tighter sm:text-6xl xl:text-8xl/none bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-500">
-                  John Doe
+                  Nawaz Sayyad
                 </h1>
                 <p className="text-2xl text-accent font-medium tracking-wider">
-                  Greater Software Developer
+                  Software System Architect
                 </p>
                 <p className="max-w-[600px] text-muted-foreground md:text-xl">
                   I build beautiful, responsive, and highly performant web
