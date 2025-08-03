@@ -66,27 +66,27 @@ const FallingIcons = () => {
 export default function Home() {
   const achievements = [
     {
-      img: "/nawaz.jpeg",
+      img: "/nawaz.png",
       dataAiHint: "Google Cloud hackathon winner",
       desc: "Awarded 'Break Through Concept Award' for Project AI-Charya.",
     },
     {
-      img: "/nawaz.jpeg",
+      img: "/nawaz.png",
       dataAiHint: "developer award",
       desc: "Lead developer on a project that reached 1 million active users.",
     },
     {
-      img: "/nawaz.jpeg",
+      img: "/nawaz.png",
       dataAiHint: "hackathon winner",
       desc: "Successfully managed and delivered three major products ahead of schedule.",
     },
     {
-      img: "/nawaz.jpeg",
+      img: "/nawaz.png",
       dataAiHint: "developer award",
       desc: "Keynote speaker at the International Developer Conference 2023.",
     },
     {
-      img: "/nawaz.jpeg",
+      img: "/nawaz.png",
       dataAiHint: "hackathon winner",
       desc: "Top contributor to a popular open-source machine learning library.",
     },
@@ -117,7 +117,7 @@ export default function Home() {
           <div className="container px-4 md:px-6 grid md:grid-cols-2 gap-16 items-center">
             {/* Left Column: Text Content & Falling Icons */}
             <div className="relative flex flex-col space-y-6 text-left h-full justify-center">
-               <div className="absolute -inset-8 z-0 w-full h-full [mask-image:radial-gradient(ellipse_at_center,white_30%,transparent_80%)]">
+               <div className="absolute -inset-8 z-0 w-full h-full [mask-image:linear-gradient(to_left,white_20%,transparent_80%)]">
                 <FallingIcons />
               </div>
 
