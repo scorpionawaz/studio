@@ -123,14 +123,14 @@ export default function Home() {
   }, [isMounted, achievements.length]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-background/95">
+    <div className="flex flex-col min-h-screen bg-background/95 relative">
+       <IconRain />
        <KeyAchievements />
       <main className="flex-1">
-        <section id="achievements" className="w-full h-[calc(100vh-80px)] flex items-center relative overflow-hidden">
+        <section id="achievements" className="w-full h-[calc(100vh-80px)] flex items-center relative">
           <div className="container px-4 md:px-6 grid md:grid-cols-2 gap-16 items-center">
             {/* Left Column: Text Content */}
             <div className="relative flex flex-col space-y-6 text-left h-full justify-center">
-               <IconRain />
               <div className="relative z-10">
                 <h1 className="font-headline text-5xl font-bold tracking-tighter sm:text-6xl xl:text-8xl/none">
                   Nawaz Sayyad
