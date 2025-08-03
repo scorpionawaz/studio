@@ -8,6 +8,7 @@ import Link from "next/link";
 import { MoveRight } from "lucide-react";
 import KeyAchievements from "@/components/key-achievements";
 
+
 const SvgIcon = ({ d, size = 48, viewBox="0 0 24 24" }: { d: string; size?: number, viewBox?: string }) => (
   <svg
     width={size}
@@ -117,7 +118,7 @@ export default function Home() {
           <div className="container px-4 md:px-6 grid md:grid-cols-2 gap-16 items-center">
             {/* Left Column: Text Content & Falling Icons */}
             <div className="relative flex flex-col space-y-6 text-left h-full justify-center">
-               <div className="absolute -inset-8 z-0 w-full h-full [mask-image:linear-gradient(to_left,white_20%,transparent_80%)]">
+               <div className="absolute -inset-8 z-0 w-full h-full [mask-image:linear-gradient(to_left,white,transparent_75%)]">
                 <FallingIcons />
               </div>
 
