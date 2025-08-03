@@ -1,3 +1,6 @@
+"use client";
+
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -8,48 +11,107 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { MoveRight } from "lucide-react";
 import Link from "next/link";
+import { MoveRight, Code, BrainCircuit, ShieldCheck, TerminalSquare } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { type EmblaCarouselType } from 'embla-carousel-react';
 
-const achievements = [
+const icons = [
+  { icon: <Code className="h-10 w-10 text-accent" />, name: "Python" },
+  { icon: <BrainCircuit className="h-10 w-10 text-accent" />, name: "LLMs" },
+  { icon: <ShieldCheck className="h-10 w-10 text-accent" />, name: "Security" },
+  { icon: <TerminalSquare className="h-10 w-10 text-accent" />, name: "SDKs" },
+];
+
+const achievementsData = [
   {
     imageUrl: "https://placehold.co/400x600.png",
     hint: "award certificate",
     title: "Innovative Project Award",
+    description: "Recognized for developing a groundbreaking AI-driven data analysis tool.",
   },
   {
     imageUrl: "https://placehold.co/400x600.png",
     hint: "team collaboration",
     title: "Top Performer Recognition",
+    description: "Awarded for exceptional performance and leadership in a fast-paced team environment.",
   },
   {
     imageUrl: "https://placehold.co/400x600.png",
     hint: "github contribution graph",
     title: "Open Source Contributor",
+    description: "Active contributor to major open-source projects, including React and Next.js.",
   },
   {
     imageUrl: "https://placehold.co/400x600.png",
     hint: "public speaking tech",
     title: "Tech Conference Speaker",
+    description: "Invited to speak at international conferences on the future of web development.",
   },
   {
     imageUrl: "https://placehold.co/400x600.png",
     hint: "hackathon winner",
     title: "Hackathon Winner",
+    description: "First place in a 24-hour hackathon for creating a real-time collaborative coding app.",
   },
 ];
 
-// Duplicate achievements to create a seamless loop for the scrolling animation
-const extendedAchievements = [...achievements, ...achievements];
-
 export default function Home() {
+  const [api, setApi] = useState<EmblaCarouselType>();
+  const [current, setCurrent] = useState(0);
+
+  const scrollNext = useCallback(() => {
+    if (api) {
+      api.scrollNext();
+    }
+  }, [api]);
+
+  useEffect(() => {
+    if (!api) {
+      return;
+    }
+
+    const onSelect = () => {
+      setCurrent(api.selectedScrollSnap());
+    };
+
+    api.on("select", onSelect);
+    onSelect(); // Set initial state
+
+    const interval = setInterval(() => {
+      scrollNext();
+    }, 2000);
+
+    return () => {
+      clearInterval(interval);
+      api.off("select", onSelect);
+    };
+  }, [api, scrollNext]);
+  
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-1">
         {/* Hero Section */}
         <section className="w-full h-screen flex items-center bg-background relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-background via-black to-background animate-background-pan [mask-image:radial-gradient(ellipse_at_center,rgba(0,0,0,0.6)_40%,transparent_100%)]"></div>
-          <div className="absolute inset-0 bg-grid-zinc-800/20 [mask-image:linear-gradient(to_bottom,white_10%,transparent_70%)]"></div>
+           <div className="absolute inset-0 bg-grid-zinc-800/20 [mask-image:linear-gradient(to_bottom,white_10%,transparent_70%)]"></div>
+          
+           {/* Floating Icons */}
+           <div className="absolute inset-0 z-0">
+            {icons.map((item, index) => (
+                <div
+                key={item.name}
+                className="absolute animate-float"
+                style={{
+                    top: `${10 + index * 20}%`,
+                    left: `${15 + (index % 2) * 50}%`,
+                    animationDelay: `${index * 1.5}s`,
+                }}
+                >
+                {item.icon}
+                </div>
+            ))}
+          </div>
+
 
           <div className="container px-4 md:px-6 grid md:grid-cols-2 gap-8 items-center z-10">
             {/* Left Column: Text Content */}
@@ -74,26 +136,48 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Column: Achievements Scroller */}
-            <div className="h-[500px] overflow-hidden relative [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]">
-              <div className="flex flex-col gap-4 animate-up-scroll">
-                {extendedAchievements.map((achievement, index) => (
-                  <Card
-                    key={index}
-                    className="bg-secondary/30 backdrop-blur-sm border-accent/20 overflow-hidden animate-electric-shock"
-                     style={{ animationDelay: `${index * 0.5}s` }}
-                  >
-                    <Image
-                      src={achievement.imageUrl}
-                      alt={achievement.title}
-                      width={400}
-                      height={600}
-                      data-ai-hint={achievement.hint}
-                      className="w-full h-auto object-cover"
-                    />
-                  </Card>
-                ))}
-              </div>
+            {/* Right Column: Achievements Carousel */}
+            <div className="h-[600px] flex items-center justify-center">
+                 <Carousel
+                    setApi={setApi}
+                    opts={{
+                        align: "center",
+                        loop: true,
+                        axis: 'y',
+                    }}
+                    orientation="vertical"
+                    className="w-full max-w-md h-full"
+                >
+                    <CarouselContent className="h-full">
+                    {achievementsData.map((achievement, index) => (
+                        <CarouselItem key={index} className="pt-4 md:basis-1/3">
+                            <div className="p-1 h-full flex items-center justify-center">
+                                <Card
+                                    className={cn(
+                                        "w-[80%] h-auto bg-secondary/30 backdrop-blur-sm border-accent/20 overflow-hidden transition-all duration-500 ease-in-out",
+                                        index === current ? "scale-110 opacity-100" : "scale-75 opacity-40"
+                                    )}
+                                >
+                                    <CardContent className="flex flex-col items-center justify-center p-0">
+                                      <Image
+                                          src={achievement.imageUrl}
+                                          alt={achievement.title}
+                                          width={400}
+                                          height={600}
+                                          data-ai-hint={achievement.hint}
+                                          className="w-full h-auto object-cover"
+                                      />
+                                      <div className="p-4 text-center">
+                                          <h3 className="font-bold text-lg text-primary">{achievement.title}</h3>
+                                          <p className="text-sm text-muted-foreground">{achievement.description}</p>
+                                      </div>
+                                    </CardContent>
+                                </Card>
+                            </div>
+                        </CarouselItem>
+                    ))}
+                    </CarouselContent>
+                </Carousel>
             </div>
           </div>
         </section>
