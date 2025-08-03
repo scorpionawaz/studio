@@ -148,55 +148,35 @@ export default function Home() {
             {/* Right Column: Achievement Carousel */}
             <div className="h-[500px] flex items-center justify-center relative overflow-hidden">
                <div className="absolute w-full h-full flex items-center justify-center">
-                    {isMounted && achievements.map((achievement, index) => {
-                        const offset = (index - currentIndex + achievements.length) % achievements.length;
-                        
-                        const isVisible = offset < 3;
-                        const isCenter = offset === 1;
-
-                        const x = isVisible ? (offset - 1) * 50 : (offset > achievements.length / 2 ? -50 : 50);
-                        const scale = isVisible ? (isCenter ? 1.2 : 0.9) : 0.8;
-                        const opacity = isVisible ? 1 : 0;
-                        
-                        let maskImage = 'none';
-                        if (offset === 0) { // previous card (left)
-                            maskImage = 'linear-gradient(to right, transparent 0%, black 50%)';
-                        } else if (offset === 2) { // next card (right)
-                             maskImage = 'linear-gradient(to left, transparent 0%, black 50%)';
-                        }
-
-                        return (
-                            <div
-                                key={index}
-                                className="absolute w-[450px] transition-all duration-700 ease-in-out"
-                                style={{
-                                    transform: `translateX(${x}%) scale(${scale})`,
-                                    opacity: opacity,
-                                    zIndex: isCenter ? 10 : 1,
-                                    WebkitMaskImage: maskImage,
-                                    maskImage: maskImage,
-                                }}
-                            >
-                                <Card className="overflow-hidden bg-secondary/30 backdrop-blur-sm border-accent/20">
-                                    <CardContent className="p-0">
-                                        <Image
-                                            src={achievement.img}
-                                            alt={achievement.desc}
-                                            width={600}
-                                            height={400}
-                                            data-ai-hint={achievement.dataAiHint}
-                                            className="w-full h-auto object-cover aspect-[4/3]"
-                                        />
-                                        <div className="p-4">
-                                            <p className="text-muted-foreground text-sm text-center">
-                                                {achievement.desc}
-                                            </p>
-                                        </div>
-                                    </CardContent>
-                                </Card>
-                            </div>
-                        );
-                    })}
+                    {isMounted && achievements.map((achievement, index) => (
+                        <div
+                            key={index}
+                            className="absolute w-[450px] transition-all duration-700 ease-in-out"
+                            style={{
+                                transform: `translateX(${(index - currentIndex) * 100}%) scale(${1 - Math.abs(index - currentIndex) * 0.2})`,
+                                opacity: Math.abs(index - currentIndex) < 2 ? 1 : 0,
+                                zIndex: achievements.length - Math.abs(index - currentIndex),
+                            }}
+                        >
+                            <Card className="overflow-hidden bg-secondary/30 backdrop-blur-sm border-accent/20">
+                                <CardContent className="p-0">
+                                    <Image
+                                        src={achievement.img}
+                                        alt={achievement.desc}
+                                        width={600}
+                                        height={400}
+                                        data-ai-hint={achievement.dataAiHint}
+                                        className="w-full h-auto object-cover aspect-[4/3]"
+                                    />
+                                    <div className="p-4">
+                                        <p className="text-muted-foreground text-sm text-center">
+                                            {achievement.desc}
+                                        </p>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        </div>
+                    ))}
                 </div>
             </div>
           </div>
