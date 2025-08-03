@@ -144,22 +144,6 @@
 }
 
 
-@keyframes float {
-  0% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-20px) rotate(5deg);
-  }
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
 @keyframes fall {
   from {
     transform: translateY(-10vh) scale(0.8);
@@ -173,40 +157,6 @@
 
 .animate-fall {
   animation: fall linear infinite;
-}
-
-
-@keyframes subtle-glow {
-  0% {
-    box-shadow: 0 0 5px hsl(var(--accent) / 0.1), 0 0 10px hsl(var(--accent) / 0.1);
-  }
-  50% {
-     box-shadow: 0 0 20px hsl(var(--accent) / 0.2), 0 0 30px hsl(var(--accent) / 0.2);
-  }
-  100% {
-    box-shadow: 0 0 5px hsl(var(--accent) / 0.1), 0 0 10px hsl(var(--accent) / 0.1);
-  }
-}
-
-.animate-subtle-glow {
-  animation: subtle-glow 3s ease-in-out infinite alternate;
-}
-
-@keyframes background-pan {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.animate-background-pan {
-    background-size: 200% 200%;
-    animation: background-pan 15s ease-in-out infinite;
 }
 
 .particle {

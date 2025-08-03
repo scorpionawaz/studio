@@ -7,7 +7,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { MoveRight } from "lucide-react";
 import KeyAchievements from "@/components/key-achievements";
-import { cn } from "@/lib/utils";
 
 const SvgIcon = ({ d, size = 48, viewBox="0 0 24 24" }: { d: string; size?: number, viewBox?: string }) => (
   <svg
@@ -21,7 +20,7 @@ const SvgIcon = ({ d, size = 48, viewBox="0 0 24 24" }: { d: string; size?: numb
   </svg>
 );
 
-const FloatingIcons = () => {
+const FallingIcons = () => {
     const icons = [
         { name: 'Python', icon: <SvgIcon d="M16.25 8.5C16.25 11.25 13.75 12.25 12 12.25C10.25 12.25 7.75 11.25 7.75 8.5C7.75 5.75 10.25 5.5 12 5.5C13.75 5.5 16.25 5.75 16.25 8.5ZM12 1C11.75 1 11.75 1.25 11.75 1.25V4.5H12C14.75 4.5 17.25 5 17.25 8.5C17.25 12 14.75 13.25 12 13.25C9.25 13.25 6.75 12 6.75 8.5C6.75 5 9.25 4.5 12 4.5H12.25V1.25C12.25 1.25 12.25 1 12 1Z M7.75 15.5C7.75 12.75 10.25 11.75 12 11.75C13.75 11.75 16.25 12.75 16.25 15.5C16.25 18.25 13.75 18.5 12 18.5C10.25 18.5 7.75 18.25 7.75 15.5ZM12 23C12.25 23 12.25 22.75 12.25 22.75V19.5H12C9.25 19.5 6.75 19 6.75 15.5C6.75 12 9.25 10.75 12 10.75C14.75 10.75 17.25 12 17.25 15.5C17.25 19 14.75 19.5 12 19.5H11.75V22.75C11.75 22.75 11.75 23 12 23Z"/> },
         { name: 'React', icon: <SvgIcon d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4C16.4183 4 20 7.58172 20 12C20 16.4183 16.4183 20 12 20Z M12 6.46411L13.7321 7.46411L14.7321 9.23205L12 10.7321L9.26795 9.23205L10.2679 7.46411L12 6.46411Z M6.46411 12L7.46411 10.2679L9.23205 9.26795L10.7321 12L9.23205 14.7321L7.46411 13.7321L6.46411 12Z M17.5359 12L16.5359 13.7321L14.7679 14.7321L13.2679 12L14.7679 9.26795L16.5359 10.2679L17.5359 12Z M12 17.5359L10.2679 16.5359L9.26795 14.7679L12 13.2679L14.7321 14.7679L13.7321 16.5359L12 17.5359Z"/> },
@@ -39,9 +38,8 @@ const FloatingIcons = () => {
     setStyles(
       icons.map(() => ({
         left: `${Math.random() * 100}%`,
-        animationDelay: `${Math.random() * 10}s`,
-        animationDuration: `${10 + Math.random() * 10}s`,
-        top: `${Math.random() * 100}%`,
+        animationDelay: `${Math.random() * 20}s`,
+        animationDuration: `${15 + Math.random() * 10}s`,
       }))
     );
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -50,15 +48,15 @@ const FloatingIcons = () => {
   return (
     <div className="absolute inset-0 z-0 w-full h-full overflow-hidden">
       {styles.length > 0 && icons.map((item, index) => (
-          <div
+        <div
           key={index}
-          className="absolute animate-float"
+          className="absolute animate-fall"
           style={styles[index]}
-          >
-              <div className="text-muted-foreground/30 transform-gpu transition-transform hover:scale-110 animate-subtle-glow">
-                {item.icon}
-              </div>
+        >
+          <div className="text-muted-foreground/30 transform-gpu transition-transform hover:scale-110">
+            {item.icon}
           </div>
+        </div>
       ))}
     </div>
   );
@@ -115,19 +113,16 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
        <KeyAchievements />
       <main className="flex-1">
-        <section 
-          id="achievements" 
-          className="w-full h-[calc(100vh-80px)] flex items-center bg-gradient-to-br from-indigo-900/40 via-background to-background relative overflow-hidden animate-background-pan"
-        >
-          <div className="container px-4 md:px-6 grid md:grid-cols-2 gap-16 items-center z-10">
-            {/* Left Column: Text Content & Floating Icons */}
+        <section id="achievements" className="w-full h-[calc(100vh-80px)] flex items-center relative overflow-hidden">
+          <div className="container px-4 md:px-6 grid md:grid-cols-2 gap-16 items-center">
+            {/* Left Column: Text Content & Falling Icons */}
             <div className="relative flex flex-col space-y-6 text-left h-full justify-center">
-              <div className="absolute -inset-8 z-0 w-[120%] h-full [mask-image:radial-gradient(ellipse_at_center,white_30%,transparent_80%)]">
-                <FloatingIcons />
+               <div className="absolute -inset-8 z-0 w-full h-full [mask-image:radial-gradient(ellipse_at_center,white_30%,transparent_80%)]">
+                <FallingIcons />
               </div>
 
               <div className="relative z-10">
-                <h1 className="font-headline text-5xl font-bold tracking-tighter sm:text-6xl xl:text-8xl/none bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-500">
+                <h1 className="font-headline text-5xl font-bold tracking-tighter sm:text-6xl xl:text-8xl/none">
                   Nawaz Sayyad
                 </h1>
                 <p className="text-2xl text-accent font-medium tracking-wider">
