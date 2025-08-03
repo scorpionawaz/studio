@@ -40,69 +40,37 @@ const SvgIcon = ({ d, size = 48, viewBox="0 0 24 24" }: { d: string; size?: numb
   </svg>
 );
 
-const FloatingIcons = () => {
+const IconRain = () => {
     const [icons, setIcons] = React.useState<any[]>([]);
-    const containerRef = React.useRef<HTMLDivElement>(null);
 
     React.useEffect(() => {
-        const generatedIcons = techIcons.map((icon, index) => {
-            const angle = (index / techIcons.length) * 2 * Math.PI;
-            const speed = 0.01 + Math.random() * 0.01;
-            const initialRadius = 150 + Math.random() * 50; 
-            return { 
-                ...icon, 
-                angle, 
-                speed, 
-                radius: initialRadius, 
-                initialRadius, 
-                size: 24 + Math.random() * 24 
+        const generatedIcons = Array.from({ length: 30 }).map((_, index) => {
+            const baseIcon = techIcons[index % techIcons.length];
+            return {
+                ...baseIcon,
+                id: index,
+                style: {
+                    left: `${Math.random() * 100}vw`,
+                    animationDuration: `${5 + Math.random() * 5}s`,
+                    animationDelay: `${Math.random() * 5}s`,
+                    transform: `scale(${0.5 + Math.random() * 0.5})`,
+                },
             };
         });
         setIcons(generatedIcons);
-
-        let animationFrameId: number;
-        const animate = () => {
-            setIcons(prevIcons => 
-                prevIcons.map(icon => ({
-                    ...icon,
-                    angle: icon.angle + icon.speed,
-                    radius: icon.initialRadius + Math.sin(icon.angle * 2) * 20,
-                }))
-            );
-            animationFrameId = requestAnimationFrame(animate);
-        };
-        animationFrameId = requestAnimationFrame(animate);
-
-        return () => cancelAnimationFrame(animationFrameId);
     }, []);
 
-    const getPosition = (angle: number, radius: number) => {
-        if (!containerRef.current) return { x: 0, y: 0 };
-        const { width, height } = containerRef.current.getBoundingClientRect();
-        const x = width / 2 + radius * Math.cos(angle);
-        const y = height / 2 + radius * Math.sin(angle);
-        return { x, y };
-    };
-    
     return (
-        <div ref={containerRef} className="absolute inset-0 w-full h-full">
-            {icons.map((icon, index) => {
-                const { x, y } = getPosition(icon.angle, icon.radius);
-                return (
-                    <div
-                        key={index}
-                        className="absolute"
-                        style={{
-                            left: x,
-                            top: y,
-                            transform: 'translate(-50%, -50%)',
-                            transition: 'left 0.1s linear, top 0.1s linear',
-                        }}
-                    >
-                        <SvgIcon d={icon.d} size={icon.size} viewBox={icon.viewBox}/>
-                    </div>
-                );
-            })}
+        <div className="absolute inset-0 w-full h-full overflow-hidden">
+            {icons.map((icon) => (
+                <div
+                    key={icon.id}
+                    className="absolute animate-fall"
+                    style={icon.style}
+                >
+                    <SvgIcon d={icon.d} size={48} viewBox={icon.viewBox} />
+                </div>
+            ))}
         </div>
     );
 };
@@ -162,7 +130,7 @@ export default function Home() {
           <div className="container px-4 md:px-6 grid md:grid-cols-2 gap-16 items-center">
             {/* Left Column: Text Content */}
             <div className="relative flex flex-col space-y-6 text-left h-full justify-center">
-               <FloatingIcons />
+               <IconRain />
               <div className="relative z-10">
                 <h1 className="font-headline text-5xl font-bold tracking-tighter sm:text-6xl xl:text-8xl/none">
                   Nawaz Sayyad
@@ -228,4 +196,3 @@ export default function Home() {
     
 
 }
-
