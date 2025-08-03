@@ -9,7 +9,7 @@ import { MoveRight } from "lucide-react";
 import KeyAchievements from "@/components/key-achievements";
 import { cn } from "@/lib/utils";
 
-const SvgIcon = ({ d, size = 24 }: { d: string; size?: number }) => (
+const SvgIcon = ({ d, size = 48 }: { d: string; size?: number }) => (
   <svg
     width={size}
     height={size}
@@ -57,7 +57,7 @@ const FallingIcons = () => {
           className="absolute animate-fall"
           style={styles[index]}
           >
-              <div className="text-muted-foreground/30 transform-gpu transition-transform hover:scale-110">
+              <div className="text-muted-foreground transform-gpu transition-transform hover:scale-110">
                 {item.icon}
               </div>
           </div>
