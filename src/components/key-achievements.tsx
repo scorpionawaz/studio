@@ -15,7 +15,7 @@ const particleCount = 20;
 const Particles = ({ active }: { active: boolean }) => {
   if (!active) return null;
   return (
-    <div className="absolute inset-0">
+    <div className="absolute inset-0 pointer-events-none">
       {Array.from({ length: particleCount }).map((_, i) => {
         const angle = (i / particleCount) * 2 * Math.PI;
         const x = Math.cos(angle);
@@ -42,16 +42,30 @@ const Particles = ({ active }: { active: boolean }) => {
 const KeyAchievements = () => {
   const [index, setIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [showParticles, setShowParticles] = useState(false);
   const [key, setKey] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setIsAnimating(true);
+      setShowParticles(true); // Start particles with glitch
+
+      setTimeout(() => {
+        setShowParticles(false); // End first burst
+      }, 300);
+
       setTimeout(() => {
          setIndex((prevIndex) => (prevIndex + 1) % achievements.length);
          setKey(prevKey => prevKey + 1);
          setIsAnimating(false);
-      }, 500); // Duration of the glitch animation
+         
+         // Second burst after text changes
+         setShowParticles(true);
+         setTimeout(() => {
+            setShowParticles(false)
+         }, 300);
+
+      }, 600); // Duration of the glitch animation
     }, 4000); 
 
     return () => clearInterval(interval);
@@ -71,7 +85,7 @@ const KeyAchievements = () => {
         >
             <p>{achievements[index]}</p>
         </div>
-        <Particles active={isAnimating} />
+        <Particles active={showParticles} />
     </div>
   );
 };
