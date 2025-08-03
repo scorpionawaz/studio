@@ -53,7 +53,7 @@ const FallingIcons = () => {
           className="absolute animate-fall"
           style={styles[index]}
         >
-          <div className="text-muted-foreground/30 transform-gpu transition-transform hover:scale-110">
+          <div className="text-muted-foreground transform-gpu transition-transform hover:scale-110">
             {item.icon}
           </div>
         </div>
@@ -156,7 +156,7 @@ export default function Home() {
                                 zIndex: achievements.length - Math.abs(index - currentIndex),
                             }}
                         >
-                            <Card className="overflow-hidden bg-secondary/30 backdrop-blur-sm border-accent/20">
+                            <Card className="overflow-hidden bg-secondary/30 backdrop-blur-sm border-accent/20 animate-subtle-glow">
                                 <CardContent className="p-0">
                                     <Image
                                         src={achievement.img}
