@@ -110,7 +110,7 @@ export default function Home() {
   }, [isMounted, achievements.length]);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-background/95">
        <KeyAchievements />
       <main className="flex-1">
         <section id="achievements" className="w-full h-[calc(100vh-80px)] flex items-center relative overflow-hidden">
@@ -184,3 +184,4 @@ export default function Home() {
   );
 
     
+
