@@ -113,31 +113,23 @@ export default function Home() {
   const carouselWrapperRef = useRef<HTMLDivElement>(null);
 
   const scrollNext = useCallback(() => {
-    if (api) {
-      api.scrollNext();
-    }
+    api?.scrollNext();
   }, [api]);
 
   useEffect(() => {
-    if (!api) {
-      return;
-    }
+    if (!api) return;
 
-    const onSelect = () => {
-      const newIndex = api.selectedScrollSnap();
-      if(newIndex !== current) {
-         setCurrent(newIndex);
-         setCelebrationTrigger(prev => prev + 1);
+    const onSelect = (emblaApi: EmblaCarouselType) => {
+      const newIndex = emblaApi.selectedScrollSnap();
+      if (current !== newIndex) {
+        setCurrent(newIndex);
+        setCelebrationTrigger(prev => prev + 1);
       }
     };
-
+    
     api.on("select", onSelect);
-    onSelect();
 
-    const interval = setInterval(() => {
-      scrollNext();
-    }, 3000);
-
+    const interval = setInterval(scrollNext, 3000);
     return () => {
       clearInterval(interval);
       api.off("select", onSelect);
@@ -153,7 +145,7 @@ export default function Home() {
           
           <div className="container px-4 md:px-6 grid md:grid-cols-2 gap-8 items-center z-10">
             {/* Left Column: Text Content & Falling Icons */}
-            <div className="relative flex flex-col space-y-6 text-left h-full">
+            <div className="relative flex flex-col space-y-6 text-left h-full justify-center">
               {/* Falling Icons Container */}
               <div className="absolute inset-0 z-0 w-full h-full overflow-hidden">
                 {icons.map((item, index) => (
@@ -208,11 +200,11 @@ export default function Home() {
                 >
                     <CarouselContent className="h-full">
                     {achievementsData.map((achievement, index) => (
-                        <CarouselItem key={index} className="pt-4 md:basis-1/3">
+                        <CarouselItem key={index} className="pt-4 basis-1/3">
                             <div className="p-1 h-full flex items-center justify-center relative" ref={index === current ? carouselWrapperRef : null}>
                                 <Card
                                     className={cn(
-                                        "w-[90%] h-auto bg-card/30 backdrop-blur-md border border-accent/20 overflow-hidden transition-all duration-500 ease-in-out shadow-lg shadow-accent/10",
+                                        "w-full h-auto bg-card/30 backdrop-blur-md border border-accent/20 overflow-hidden transition-all duration-500 ease-in-out shadow-lg shadow-accent/10",
                                         index === current ? "scale-110 opacity-100" : "scale-75 opacity-40"
                                     )}
                                 >
