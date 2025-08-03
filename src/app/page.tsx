@@ -145,7 +145,7 @@ export default function Home() {
             </div>
 
             {/* Right Column: Achievement Carousel */}
-            <div className="h-[500px] flex items-center justify-center relative overflow-hidden">
+            <div className="h-[500px] flex items-center justify-center relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]">
                <div className="absolute w-full h-full flex items-center justify-center">
                     {isMounted && achievements.map((achievement, index) => (
                         <div
