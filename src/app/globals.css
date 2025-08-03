@@ -125,14 +125,20 @@
   animation: slide-in-right 1s ease-out forwards;
 }
 
-@keyframes orbit {
-  0% {
-    transform: rotate(0deg) translateX(150px) rotate(0deg);
+
+@keyframes wind-blow {
+  from {
+    transform: translateX(-100vw);
   }
-  100% {
-    transform: rotate(360deg) translateX(150px) rotate(-360deg);
+  to {
+    transform: translateX(100vw);
   }
 }
+
+.animate-wind-blow {
+  animation: wind-blow 20s linear infinite;
+}
+
 
 @keyframes float {
   0% {
@@ -220,4 +226,3 @@
     opacity: 0;
   }
 }
-

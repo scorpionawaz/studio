@@ -6,35 +6,51 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { MoveRight } from "lucide-react";
-import { cn } from "@/lib/utils";
+import {
+  Code,
+  GitBranch,
+  Cloud,
+  Lock,
+  Cpu,
+  Server,
+  Database,
+  Bot,
+} from "lucide-react";
 
-const skills = [
-  { name: "Python", angle: 0 },
-  { name: "Next.js", angle: 45 },
-  { name: "SDKs", angle: 90 },
-  { name: "LLMs", angle: 135 },
-  { name: "Security", angle: 180 },
-  { name: "TypeScript", angle: 225 },
-  { name: "React", angle: 270 },
-  { name: "AI", angle: 315 },
+const icons = [
+  { icon: <Code />, name: 'Code' },
+  { icon: <GitBranch />, name: 'GitBranch' },
+  { icon: <Cloud />, name: 'Cloud' },
+  { icon: <Lock />, name: 'Lock' },
+  { icon: <Cpu />, name: 'Cpu' },
+  { icon: <Server />, name: 'Server' },
+  { icon: <Database />, name: 'Database' },
+  { icon: <Bot />, name: 'Bot' },
 ];
 
-const OrbitingSkill = ({ skill }: { skill: { name: string; angle: number } }) => {
-  const rotationStyle: React.CSSProperties = {
-    transform: `rotate(${skill.angle}deg) translateX(150px) rotate(-${skill.angle}deg)`,
-  };
+const WindyIcon = ({ icon, index }: { icon: React.ReactNode, index: number }) => {
+  const [style, setStyle] = React.useState<React.CSSProperties>({});
+
+  React.useEffect(() => {
+    const top = `${Math.random() * 100}%`;
+    const scale = `${Math.random() * 0.5 + 0.2}`;
+    const animationDelay = `${Math.random() * 20}s`;
+    const animationDuration = `${10 + Math.random() * 10}s`;
+
+    setStyle({
+      top,
+      transform: `scale(${scale})`,
+      animationDelay,
+      animationDuration,
+    });
+  }, []);
 
   return (
     <div
-      className="absolute h-20 w-20 flex items-center justify-center animate-orbit"
-      style={{
-        animationDelay: `${(skill.angle / 360) * -10}s`,
-        ...rotationStyle
-      }}
+      className="absolute text-muted-foreground/30 animate-wind-blow"
+      style={style}
     >
-      <div className="flex flex-col items-center justify-center text-center p-2 rounded-lg bg-secondary/50 backdrop-blur-sm animate-float" style={{ animationDelay: `${Math.random() * -5}s` }}>
-        <span className="font-bold text-sm text-primary">{skill.name}</span>
-      </div>
+      {icon}
     </div>
   );
 };
@@ -46,7 +62,11 @@ export default function Home() {
       <main className="flex-1">
         {/* Hero Section */}
         <section className="w-full h-screen flex items-center bg-background relative overflow-hidden">
-          <div className="absolute inset-0 bg-grid-zinc-800/20 [mask-image:linear-gradient(to_bottom,white_10%,transparent_70%)]"></div>
+          <div className="absolute inset-0 z-0">
+             {icons.map((item, index) => (
+              <WindyIcon key={index} icon={item.icon} index={index}/>
+            ))}
+          </div>
           
           <div className="container px-4 md:px-6 grid md:grid-cols-2 gap-8 items-center z-10">
             {/* Left Column: Text Content */}
@@ -73,14 +93,18 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Column: Orbiting Skills */}
+            {/* Right Column: Blended Image */}
             <div className="h-full flex items-center justify-center relative">
-              <div className="relative flex items-center justify-center w-full h-full">
-                {/* Central Point or Name could go here */}
-                {skills.map((skill) => (
-                  <OrbitingSkill key={skill.name} skill={skill} />
-                ))}
-              </div>
+               <div className="w-full h-3/4 [mask-image:linear-gradient(to_left,black_60%,transparent)]">
+                  <Image
+                    src="https://placehold.co/800x600.png"
+                    alt="Developer workspace"
+                    width={800}
+                    height={600}
+                    data-ai-hint="modern developer workspace"
+                    className="w-full h-full object-cover rounded-2xl"
+                  />
+               </div>
             </div>
           </div>
         </section>
