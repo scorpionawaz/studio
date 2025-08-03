@@ -113,21 +113,27 @@ export default function Home() {
   const carouselWrapperRef = useRef<HTMLDivElement>(null);
 
   const scrollNext = useCallback(() => {
-    api?.scrollNext();
+    if (api) {
+      api.scrollNext();
+    }
   }, [api]);
 
   useEffect(() => {
-    if (!api) return;
+    if (!api) {
+      return;
+    }
 
     const onSelect = (emblaApi: EmblaCarouselType) => {
       const newIndex = emblaApi.selectedScrollSnap();
-      if (current !== newIndex) {
-        setCurrent(newIndex);
+      setCurrent(newIndex);
+      if (newIndex !== current){
         setCelebrationTrigger(prev => prev + 1);
       }
     };
     
     api.on("select", onSelect);
+    // Initial call
+    onSelect(api);
 
     const interval = setInterval(scrollNext, 3000);
     return () => {
@@ -320,4 +326,3 @@ export default function Home() {
       </main>
     </div>
   );
-}
