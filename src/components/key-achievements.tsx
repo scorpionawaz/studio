@@ -83,7 +83,7 @@ const KeyAchievements = () => {
             key={key}
             className={cn(
                 "text-center text-2xl md:text-3xl font-headline font-bold text-foreground/90 uppercase",
-                isAnimating && "animate-glitch"
+                isAnimating && ""
             )}
              style={{
                 textShadow: isAnimating ? 'none' : '0 0 8px hsl(var(--accent) / 0.8), 0 0 16px hsl(var(--accent) / 0.5)',
