@@ -66,9 +66,9 @@ const FallingIcons = () => {
 export default function Home() {
   const achievements = [
     {
-      img: "https://placehold.co/600x400.png",
-      dataAiHint: "certificate award",
-      desc: "Awarded 'Innovator of the Year' for my work on Project Alpha.",
+      img: "nawaz.png",
+      dataAiHint: "Google Cloud Agentic AI Day Hackathon 2025",
+      desc: "Awarded 'Break Through Concept Award' for Project AI-Charya.",
     },
     {
       img: "https://placehold.co/600x400.png",
