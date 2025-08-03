@@ -5,54 +5,42 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import {
-  Award,
-  Github,
-  Linkedin,
-  MoveRight,
-  Star,
-  BrainCircuit,
-  Lock,
-  Server,
-} from "lucide-react";
+import { MoveRight } from "lucide-react";
 import Link from "next/link";
-import { SiPython, SiTypescript, SiNextdotjs, SiTailwindcss, SiFirebase } from "react-icons/si";
-
-
-const skills = [
-  { icon: SiPython, size: 48 },
-  { icon: SiNextdotjs, size: 48 },
-  { icon: SiTypescript, size: 44 },
-  { icon: BrainCircuit, size: 48 },
-  { icon: Lock, size: 48 },
-  { icon: SiFirebase, size: 48 },
-  { icon: Server, size: 48 },
-  { icon: SiTailwindcss, size: 48 },
-];
 
 const achievements = [
   {
-    icon: Award,
+    imageUrl: "https://placehold.co/400x600.png",
+    hint: "award certificate",
     title: "Innovative Project Award",
-    description: "Awarded for creating a project with significant real-world impact.",
-    delay: "0s"
   },
   {
-    icon: Star,
-    title: "Top Performer",
-    description: "Recognized for outstanding performance and contributions.",
-    delay: "0.2s"
+    imageUrl: "https://placehold.co/400x600.png",
+    hint: "team collaboration",
+    title: "Top Performer Recognition",
   },
   {
-    icon: Github,
+    imageUrl: "https://placehold.co/400x600.png",
+    hint: "github contribution graph",
     title: "Open Source Contributor",
-    description: "Active contributor to several popular open-source projects.",
-    delay: "0.4s"
+  },
+  {
+    imageUrl: "https://placehold.co/400x600.png",
+    hint: "public speaking tech",
+    title: "Tech Conference Speaker",
+  },
+  {
+    imageUrl: "https://placehold.co/400x600.png",
+    hint: "hackathon winner",
+    title: "Hackathon Winner",
   },
 ];
+
+// Duplicate achievements to create a seamless loop for the scrolling animation
+const extendedAchievements = [...achievements, ...achievements];
 
 export default function Home() {
   return (
@@ -60,33 +48,17 @@ export default function Home() {
       <main className="flex-1">
         {/* Hero Section */}
         <section className="w-full h-screen flex items-center bg-background relative overflow-hidden">
-          <div className="absolute inset-0 bg-grid-zinc-800/20 [mask-image:linear-gradient(to_bottom,white_20%,transparent)]"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-background via-black to-background animate-background-pan [mask-image:radial-gradient(ellipse_at_center,rgba(0,0,0,0.6)_40%,transparent_100%)]"></div>
+          <div className="absolute inset-0 bg-grid-zinc-800/20 [mask-image:linear-gradient(to_bottom,white_10%,transparent_70%)]"></div>
 
-          {/* Reverse Rain Animation */}
-          <div className="absolute inset-0 pointer-events-none">
-            {skills.map((Skill, index) => (
-              <Skill.icon
-                key={index}
-                className="absolute text-accent/20 animate-rise"
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  animationDelay: `${Math.random() * 20}s`,
-                  animationDuration: `${10 + Math.random() * 10}s`,
-                  width: `${24 + Math.random() * 24}px`,
-                  height: `${24 + Math.random() * 24}px`,
-                }}
-              />
-            ))}
-          </div>
-
-          <div className="container px-4 md:px-6 grid md:grid-cols-2 gap-8 items-center">
+          <div className="container px-4 md:px-6 grid md:grid-cols-2 gap-8 items-center z-10">
             {/* Left Column: Text Content */}
             <div className="flex flex-col space-y-6 text-left">
               <h1 className="font-headline text-5xl font-bold tracking-tighter sm:text-6xl xl:text-8xl/none bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-500">
                 John Doe
               </h1>
               <p className="text-2xl text-accent font-medium tracking-wider">
-                Software Engineer & Designer
+                Greater Software Developer
               </p>
               <p className="max-w-[600px] text-muted-foreground md:text-xl">
                 I build beautiful, responsive, and highly performant web
@@ -94,7 +66,7 @@ export default function Home() {
               </p>
               <div className="flex justify-start gap-4">
                 <Link href="/projects">
-                  <Button size="lg" variant="outline">
+                  <Button size="lg" variant="outline" className="hover:animate-electric-shock">
                     View My Work
                     <MoveRight className="ml-2 h-5 w-5" />
                   </Button>
@@ -102,27 +74,26 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Column: Achievements */}
-            <div className="flex flex-col space-y-4">
-              {achievements.map((achievement) => (
-                <Card
-                  key={achievement.title}
-                  className="bg-secondary/50 backdrop-blur-sm border-accent/20 animate-slide-in-right animate-electric-shock"
-                  style={{ animationDelay: achievement.delay }}
-                >
-                  <CardHeader className="flex flex-row items-center gap-4 p-4">
-                    <achievement.icon className="h-10 w-10 text-accent" />
-                    <div>
-                      <CardTitle className="font-headline text-primary text-xl">
-                        {achievement.title}
-                      </CardTitle>
-                      <p className="text-muted-foreground text-sm">
-                        {achievement.description}
-                      </p>
-                    </div>
-                  </CardHeader>
-                </Card>
-              ))}
+            {/* Right Column: Achievements Scroller */}
+            <div className="h-[500px] overflow-hidden relative [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]">
+              <div className="flex flex-col gap-4 animate-up-scroll">
+                {extendedAchievements.map((achievement, index) => (
+                  <Card
+                    key={index}
+                    className="bg-secondary/30 backdrop-blur-sm border-accent/20 overflow-hidden animate-electric-shock"
+                     style={{ animationDelay: `${index * 0.5}s` }}
+                  >
+                    <Image
+                      src={achievement.imageUrl}
+                      alt={achievement.title}
+                      width={400}
+                      height={600}
+                      data-ai-hint={achievement.hint}
+                      className="w-full h-auto object-cover"
+                    />
+                  </Card>
+                ))}
+              </div>
             </div>
           </div>
         </section>
