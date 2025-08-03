@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { MoveRight } from "lucide-react";
 import KeyAchievements from "@/components/key-achievements";
+
 const SvgIcon = ({ d, size = 48, viewBox="0 0 24 24" }: { d: string; size?: number, viewBox?: string }) => (
   <svg
     width={size}
@@ -65,7 +66,7 @@ const FallingIcons = () => {
 export default function Home() {
   const achievements = [
     {
-      img: "/nawaz.png?v=" + new Date().getTime(),
+      img: "/nawaz.png",
       dataAiHint: "Google Cloud Agentic AI Day Hackathon 2025",
       desc: "Awarded 'Break Through Concept Award' for Project AI-Charya.",
     },
