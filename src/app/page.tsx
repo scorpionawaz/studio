@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { MoveRight } from "lucide-react";
 import KeyAchievements from "@/components/key-achievements";
+import { cn } from "@/lib/utils";
 
 const SvgIcon = ({ d, size = 24 }: { d: string; size?: number }) => (
   <svg
@@ -151,29 +152,19 @@ export default function Home() {
                <div className="absolute w-full h-full flex items-center justify-center">
                     {isMounted && achievements.map((achievement, index) => {
                         const offset = (index - currentIndex + achievements.length) % achievements.length;
-                        let x = 0;
-                        let scale = 0.8;
-                        let opacity = 0.4;
-                        if(offset === 0) { // prev
-                            x = -50;
-                            scale = 0.9;
-                        } else if(offset === 1) { // current
-                            x = 0;
-                            scale = 1.2; // Make it bigger
-                            opacity = 1;
-                        } else if(offset === 2) { // next
-                            x = 50;
-                            scale = 0.9;
-                        } else {
-                            x = 50;
-                            scale = 0;
-                            opacity = 0;
-                        }
+                        
+                        const isVisible = offset < 3;
+                        const isCenter = offset === 1;
 
-                        if(offset > 2) {
-                            x = 50;
-                            scale = 0.8;
-                            opacity = 0;
+                        const x = isVisible ? (offset - 1) * 50 : (offset > achievements.length / 2 ? -50 : 50);
+                        const scale = isVisible ? (isCenter ? 1.2 : 0.9) : 0.8;
+                        const opacity = isVisible ? 1 : 0;
+                        
+                        let maskImage = 'none';
+                        if (offset === 0) { // previous card (left)
+                            maskImage = 'linear-gradient(to right, transparent 0%, black 50%)';
+                        } else if (offset === 2) { // next card (right)
+                             maskImage = 'linear-gradient(to left, transparent 0%, black 50%)';
                         }
 
                         return (
@@ -183,7 +174,9 @@ export default function Home() {
                                 style={{
                                     transform: `translateX(${x}%) scale(${scale})`,
                                     opacity: opacity,
-                                    zIndex: offset === 1 ? 10 : 1,
+                                    zIndex: isCenter ? 10 : 1,
+                                    WebkitMaskImage: maskImage,
+                                    maskImage: maskImage,
                                 }}
                             >
                                 <Card className="overflow-hidden bg-secondary/30 backdrop-blur-sm border-accent/20 animate-subtle-glow">
