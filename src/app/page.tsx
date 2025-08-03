@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { MoveRight } from "lucide-react";
+import KeyAchievements from "@/components/key-achievements";
 
 const SvgIcon = ({ d, size = 24 }: { d: string; size?: number }) => (
   <svg
@@ -113,8 +114,9 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen">
+       <KeyAchievements />
       <main className="flex-1">
-        <section className="w-full h-screen flex items-center bg-background relative overflow-hidden">
+        <section className="w-full h-[calc(100vh-80px)] flex items-center bg-background relative overflow-hidden">
           <div className="container px-4 md:px-6 grid md:grid-cols-2 gap-16 items-center z-10">
             {/* Left Column: Text Content & Floating Icons */}
             <div className="relative flex flex-col space-y-6 text-left h-full justify-center">
@@ -154,14 +156,14 @@ export default function Home() {
                         let opacity = 0.4;
                         if(offset === 0) { // prev
                             x = -50;
-                            scale = 0.8;
+                            scale = 0.9;
                         } else if(offset === 1) { // current
                             x = 0;
-                            scale = 1.1; // Make it bigger
+                            scale = 1.2; // Make it bigger
                             opacity = 1;
                         } else if(offset === 2) { // next
                             x = 50;
-                            scale = 0.8;
+                            scale = 0.9;
                         } else {
                             x = 50;
                             scale = 0;
@@ -177,7 +179,7 @@ export default function Home() {
                         return (
                             <div
                                 key={index}
-                                className="absolute w-[350px] transition-all duration-700 ease-in-out"
+                                className="absolute w-[450px] transition-all duration-700 ease-in-out"
                                 style={{
                                     transform: `translateX(${x}%) scale(${scale})`,
                                     opacity: opacity,
