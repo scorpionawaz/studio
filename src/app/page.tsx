@@ -69,27 +69,27 @@ const IconRain = () => {
 export default function Home() {
   const achievements = [
     {
-      img: "/nawaz.png",
+      img: "/nawaz.jpeg",
       dataAiHint: "Google Cloud hackathon winner",
       desc: "Awarded 'Break Through Concept Award' for Project AI-Charya.",
     },
     {
-      img: "https://placehold.co/600x401.png",
+      img: "/nawaz.jpeg",
       dataAiHint: "developer award",
       desc: "Lead developer on a project that reached 1 million active users.",
     },
     {
-      img: "https://placehold.co/600x402.png",
+      img: "/nawaz.jpeg",
       dataAiHint: "hackathon winner",
       desc: "Successfully managed and delivered three major products ahead of schedule.",
     },
     {
-      img: "https://placehold.co/600x403.png",
+      img: "/nawaz.jpeg",
       dataAiHint: "developer award",
       desc: "Keynote speaker at the International Developer Conference 2023.",
     },
     {
-      img: "https://placehold.co/600x404.png",
+      img: "/nawaz.jpeg",
       dataAiHint: "hackathon winner",
       desc: "Top contributor to a popular open-source machine learning library.",
     },
