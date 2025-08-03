@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -47,27 +48,31 @@ const KeyAchievements = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
+      // Start of transition: show particles & start glitch
+      setShowParticles(true);
       setIsAnimating(true);
-      setShowParticles(true); // Start particles with glitch
-
+  
+      // Hide particles after a short burst
       setTimeout(() => {
-        setShowParticles(false); // End first burst
-      }, 300);
-
+        setShowParticles(false);
+      }, 400); 
+  
+      // Middle of transition: change text after glitch animation has played
       setTimeout(() => {
-         setIndex((prevIndex) => (prevIndex + 1) % achievements.length);
-         setKey(prevKey => prevKey + 1);
-         setIsAnimating(false);
-         
-         // Second burst after text changes
-         setShowParticles(true);
-         setTimeout(() => {
-            setShowParticles(false)
-         }, 300);
-
-      }, 600); // Duration of the glitch animation
-    }, 4000); 
-
+        setIndex((prevIndex) => (prevIndex + 1) % achievements.length);
+        setKey(prevKey => prevKey + 1);
+        setIsAnimating(false);
+  
+        // End of transition: show another burst of particles as new text settles
+        setShowParticles(true);
+        setTimeout(() => {
+          setShowParticles(false);
+        }, 400);
+  
+      }, 600); // This should match the glitch animation duration
+  
+    }, 5000); // Slower cycle: 5 seconds total
+  
     return () => clearInterval(interval);
   }, []);
 
