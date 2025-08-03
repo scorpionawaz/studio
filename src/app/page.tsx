@@ -1,193 +1,57 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, useRef } from "react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { MoveRight, Code, BrainCircuit, ShieldCheck, TerminalSquare } from "lucide-react";
+import { MoveRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { type EmblaCarouselType } from 'embla-carousel-react';
 
-const icons = [
-  { icon: <Code className="h-10 w-10 text-accent" />, name: "Python" },
-  { icon: <BrainCircuit className="h-10 w-10 text-accent" />, name: "LLMs" },
-  { icon: <ShieldCheck className="h-10 w-10 text-accent" />, name: "Security" },
-  { icon: <TerminalSquare className="h-10 w-10 text-accent" />, name: "SDKs" },
-  { icon: <Code className="h-10 w-10 text-accent" />, name: "Next.js" },
-  { icon: <BrainCircuit className="h-10 w-10 text-accent" />, name: "AI" },
+const skills = [
+  { name: "Python", angle: 0 },
+  { name: "Next.js", angle: 45 },
+  { name: "SDKs", angle: 90 },
+  { name: "LLMs", angle: 135 },
+  { name: "Security", angle: 180 },
+  { name: "TypeScript", angle: 225 },
+  { name: "React", angle: 270 },
+  { name: "AI", angle: 315 },
 ];
 
-const achievementsData = [
-  {
-    imageUrl: "https://placehold.co/400x300.png",
-    hint: "award certificate",
-    title: "Innovative Project Award",
-    description: "Recognized for developing a groundbreaking AI-driven data analysis tool.",
-  },
-  {
-    imageUrl: "https://placehold.co/400x300.png",
-    hint: "team collaboration",
-    title: "Top Performer Recognition",
-    description: "Awarded for exceptional performance and leadership in a fast-paced team environment.",
-  },
-  {
-    imageUrl: "https://placehold.co/400x300.png",
-    hint: "github contribution graph",
-    title: "Open Source Contributor",
-    description: "Active contributor to major open-source projects, including React and Next.js.",
-  },
-  {
-    imageUrl: "https://placehold.co/400x300.png",
-    hint: "public speaking tech",
-    title: "Tech Conference Speaker",
-    description: "Invited to speak at international conferences on the future of web development.",
-  },
-  {
-    imageUrl: "https://placehold.co/400x300.png",
-    hint: "hackathon winner",
-    title: "Hackathon Winner",
-    description: "First place in a 24-hour hackathon for creating a real-time collaborative coding app.",
-  },
-];
-
-// Particle Component
-const Particle = ({ onComplete }: { onComplete: () => void }) => {
-  const timeToLive = 1000;
-  
-  useEffect(() => {
-    const timer = setTimeout(onComplete, timeToLive);
-    return () => clearTimeout(timer);
-  }, [onComplete]);
-
-  const style: React.CSSProperties = {
-    position: 'absolute',
-    left: `${Math.random() * 100}%`,
-    top: `${Math.random() * 100}%`,
-    width: `${Math.random() * 5 + 2}px`,
-    height: `${Math.random() * 5 + 2}px`,
-    background: `hsl(${Math.random() * 360}, 100%, 70%)`,
-    borderRadius: '50%',
-    animation: `particle-burst ${timeToLive / 1000}s ease-out forwards`,
-  };
-
-  return <div style={style}></div>;
-};
-
-// Celebration Effect Component
-const CelebrationEffect = ({ trigger }: { trigger: any }) => {
-  const [particles, setParticles] = useState<number[]>([]);
-
-  useEffect(() => {
-    if (trigger > 0) {
-      const newParticles = Array.from({ length: 30 }, (_, i) => Date.now() + i);
-      setParticles(newParticles);
-    }
-  }, [trigger]);
-
-  const handleComplete = (id: number) => {
-    setParticles(prev => prev.filter(pId => pId !== id));
+const OrbitingSkill = ({ skill }: { skill: { name: string; angle: number } }) => {
+  const rotationStyle: React.CSSProperties = {
+    transform: `rotate(${skill.angle}deg) translateX(150px) rotate(-${skill.angle}deg)`,
   };
 
   return (
-    <div className="absolute inset-0 pointer-events-none">
-      {particles.map((id) => (
-        <Particle key={id} onComplete={() => handleComplete(id)} />
-      ))}
-    </div>
-  );
-};
-
-// Falling Icons Component to prevent hydration errors
-const FallingIcons = () => {
-  const [iconStyles, setIconStyles] = useState<React.CSSProperties[]>([]);
-
-  useEffect(() => {
-    const styles = icons.map(() => ({
-      left: `${Math.random() * 100}%`,
-      animationDelay: `${Math.random() * 10}s`,
-      animationDuration: `${5 + Math.random() * 5}s`,
-    }));
-    setIconStyles(styles);
-  }, []);
-
-  if (iconStyles.length === 0) {
-    return null; // Render nothing on the server and initial client render
-  }
-
-  return (
-    <div className="absolute inset-0 z-0 w-full h-full overflow-hidden">
-      {icons.map((item, index) => (
-        <div
-          key={index}
-          className="absolute animate-fall"
-          style={iconStyles[index]}
-        >
-          {item.icon}
-        </div>
-      ))}
+    <div
+      className="absolute h-20 w-20 flex items-center justify-center animate-orbit"
+      style={{
+        animationDelay: `${(skill.angle / 360) * -10}s`,
+        ...rotationStyle
+      }}
+    >
+      <div className="flex flex-col items-center justify-center text-center p-2 rounded-lg bg-secondary/50 backdrop-blur-sm animate-float" style={{ animationDelay: `${Math.random() * -5}s` }}>
+        <span className="font-bold text-sm text-primary">{skill.name}</span>
+      </div>
     </div>
   );
 };
 
 
 export default function Home() {
-  const [api, setApi] = useState<EmblaCarouselType>();
-  const [current, setCurrent] = useState(0);
-  const [celebrationTrigger, setCelebrationTrigger] = useState(0);
-  const carouselWrapperRef = useRef<HTMLDivElement>(null);
-
-  const scrollNext = useCallback(() => {
-    if (api) {
-      api.scrollNext();
-    }
-  }, [api]);
-
-  useEffect(() => {
-    if (!api) {
-      return;
-    }
-
-    const onSelect = (emblaApi: EmblaCarouselType) => {
-      const newIndex = emblaApi.selectedScrollSnap();
-      setCurrent(newIndex);
-      if (newIndex !== current){
-        setCelebrationTrigger(prev => prev + 1);
-      }
-    };
-    
-    api.on("select", onSelect);
-    // Initial call
-    onSelect(api);
-
-    const interval = setInterval(scrollNext, 3000);
-    return () => {
-      clearInterval(interval);
-      api.off("select", onSelect);
-    };
-  }, [api, scrollNext, current]);
-  
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-1">
         {/* Hero Section */}
         <section className="w-full h-screen flex items-center bg-background relative overflow-hidden">
-           <div className="absolute inset-0 bg-grid-zinc-800/20 [mask-image:linear-gradient(to_bottom,white_10%,transparent_70%)]"></div>
+          <div className="absolute inset-0 bg-grid-zinc-800/20 [mask-image:linear-gradient(to_bottom,white_10%,transparent_70%)]"></div>
           
           <div className="container px-4 md:px-6 grid md:grid-cols-2 gap-8 items-center z-10">
-            {/* Left Column: Text Content & Falling Icons */}
-            <div className="relative flex flex-col space-y-6 text-left h-full justify-center">
-              {/* Falling Icons Container */}
-              <FallingIcons />
-
-              <div className="relative z-10">
+            {/* Left Column: Text Content */}
+            <div className="flex flex-col space-y-6 text-left h-full justify-center">
+              <div>
                  <h1 className="font-headline text-5xl font-bold tracking-tighter sm:text-6xl xl:text-8xl/none bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-500">
                     John Doe
                   </h1>
@@ -207,52 +71,16 @@ export default function Home() {
                     </Link>
                   </div>
               </div>
-
             </div>
 
-            {/* Right Column: Achievements Carousel */}
-            <div className="h-full flex items-center justify-center">
-                 <Carousel
-                    setApi={setApi}
-                    opts={{
-                        align: "center",
-                        loop: true,
-                        axis: 'y',
-                    }}
-                    orientation="vertical"
-                    className="w-full max-w-md h-[500px]"
-                >
-                    <CarouselContent className="h-full">
-                    {achievementsData.map((achievement, index) => (
-                        <CarouselItem key={index} className="pt-4 basis-1/3">
-                            <div className="p-1 h-full flex items-center justify-center relative" ref={index === current ? carouselWrapperRef : null}>
-                                <Card
-                                    className={cn(
-                                        "w-full h-auto bg-card/30 backdrop-blur-md border border-accent/20 overflow-hidden transition-all duration-500 ease-in-out shadow-lg shadow-accent/10",
-                                        index === current ? "scale-110 opacity-100" : "scale-75 opacity-40"
-                                    )}
-                                >
-                                    <CardContent className="flex flex-col items-center justify-center p-0">
-                                      <Image
-                                          src={achievement.imageUrl}
-                                          alt={achievement.title}
-                                          width={400}
-                                          height={300}
-                                          data-ai-hint={achievement.hint}
-                                          className="w-full h-auto object-cover aspect-[4/3]"
-                                      />
-                                      <div className="p-4 text-center">
-                                          <h3 className="font-bold text-lg text-primary">{achievement.title}</h3>
-                                          <p className="text-sm text-muted-foreground">{achievement.description}</p>
-                                      </div>
-                                    </CardContent>
-                                </Card>
-                                 {index === current && <CelebrationEffect trigger={celebrationTrigger} />}
-                            </div>
-                        </CarouselItem>
-                    ))}
-                    </CarouselContent>
-                </Carousel>
+            {/* Right Column: Orbiting Skills */}
+            <div className="h-full flex items-center justify-center relative">
+              <div className="relative flex items-center justify-center w-full h-full">
+                {/* Central Point or Name could go here */}
+                {skills.map((skill) => (
+                  <OrbitingSkill key={skill.name} skill={skill} />
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -263,16 +91,8 @@ export default function Home() {
             <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-12 text-primary">
               A Glimpse Into My World
             </h2>
-            <Carousel
-              opts={{
-                align: "start",
-                loop: true,
-              }}
-              className="w-full max-w-5xl mx-auto"
-            >
-              <CarouselContent>
-                <CarouselItem className="md:basis-1/2 lg:basis-1/3">
-                  <div className="p-1">
+            <div className="w-full max-w-5xl mx-auto">
+                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <Card className="overflow-hidden bg-secondary border-border hover:border-accent transition-colors">
                       <CardContent className="flex flex-col items-center justify-center p-0">
                         <Image
@@ -290,10 +110,6 @@ export default function Home() {
                         </div>
                       </CardContent>
                     </Card>
-                  </div>
-                </CarouselItem>
-                <CarouselItem className="md:basis-1/2 lg:basis-1/3">
-                  <div className="p-1">
                      <Card className="overflow-hidden bg-secondary border-border hover:border-accent transition-colors">
                       <CardContent className="flex flex-col items-center justify-center p-0">
                         <Image
@@ -311,10 +127,6 @@ export default function Home() {
                         </div>
                       </CardContent>
                     </Card>
-                  </div>
-                </CarouselItem>
-                <CarouselItem className="md:basis-1/2 lg:basis-1/3">
-                  <div className="p-1">
                     <Card className="overflow-hidden bg-secondary border-border hover:border-accent transition-colors">
                       <CardContent className="flex flex-col items-center justify-center p-0">
                         <Image
@@ -332,17 +144,12 @@ export default function Home() {
                         </div>
                       </CardContent>
                     </Card>
-                  </div>
-                </CarouselItem>
-              </CarouselContent>
-              <CarouselPrevious />
-              <CarouselNext />
-            </Carousel>
+                </div>
+            </div>
           </div>
         </section>
 
       </main>
     </div>
   );
-
-    
+}
