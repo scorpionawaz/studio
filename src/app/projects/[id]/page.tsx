@@ -1,11 +1,12 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { getProjectById } from "@/lib/projects";
+import { getProjectById, projects } from "@/lib/projects";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { PlayCircle, BookOpen } from "lucide-react";
 import CodeAccessForm from "@/components/code-access-form";
+import React from 'react';
 
 type ProjectPageProps = {
   params: {
@@ -14,15 +15,14 @@ type ProjectPageProps = {
 };
 
 export function generateStaticParams() {
-  // In a real app, you would fetch this from a database or CMS
-  const projects = [ {id: '1'}, {id: '2'}, {id: '3'}, {id: '4'}]
   return projects.map((project) => ({
     id: project.id,
   }));
 }
 
 export default function ProjectPage({ params }: ProjectPageProps) {
-  const project = getProjectById(params.id);
+  const resolvedParams = React.use(Promise.resolve(params));
+  const project = getProjectById(resolvedParams.id);
 
   if (!project) {
     notFound();
