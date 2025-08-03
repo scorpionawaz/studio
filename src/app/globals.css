@@ -61,10 +61,10 @@
 
 @keyframes up-scroll {
   from {
-    transform: translateY(0%);
+    transform: translateX(0%);
   }
   to {
-    transform: translateY(-100%);
+    transform: translateX(-50%);
   }
 }
 
@@ -174,10 +174,13 @@
 
 @keyframes subtle-glow {
   0% {
-    box-shadow: 0 0 5px var(--tw-shadow-color-accent), 0 0 10px var(--tw-shadow-color-accent);
+    box-shadow: 0 0 5px hsl(var(--accent) / 0.1), 0 0 10px hsl(var(--accent) / 0.1);
+  }
+  50% {
+     box-shadow: 0 0 20px hsl(var(--accent) / 0.2), 0 0 30px hsl(var(--accent) / 0.2);
   }
   100% {
-    box-shadow: 0 0 20px var(--tw-shadow-color-accent), 0 0 30px var(--tw-shadow-color-accent);
+    box-shadow: 0 0 5px hsl(var(--accent) / 0.1), 0 0 10px hsl(var(--accent) / 0.1);
   }
 }
 
