@@ -69,6 +69,7 @@ export default function Home() {
 
   const iconStyles = React.useMemo(() => {
     if (!isMounted) return [];
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     return skills.map(() => ({
       position: 'absolute',
       top: `${10 + Math.random() * 80}%`,
@@ -76,7 +77,7 @@ export default function Home() {
       transform: `translate(-50%, -50%) scale(${0.5 + Math.random() * 0.8})`,
       animation: `float ${6 + Math.random() * 12}s ease-in-out infinite`,
     }));
-  }, [isMounted, skills.length]);
+  }, [isMounted]);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -116,25 +117,16 @@ export default function Home() {
                 </div>
             </div>
 
-            {/* Right Column: Blended Image */}
+            {/* Right Column: Empty for balance */}
             <div className="h-full flex items-center justify-center relative">
-               <div className="w-full h-3/4 [mask-image:linear-gradient(to_left,black_60%,transparent)]">
-                  <Image
-                    src="https://placehold.co/800x600.png"
-                    alt="Developer workspace"
-                    width={800}
-                    height={600}
-                    data-ai-hint="modern developer workspace"
-                    className="w-full h-full object-cover rounded-2xl"
-                  />
-               </div>
+              {/* This column is intentionally left empty to balance the layout */}
             </div>
           </div>
         </section>
 
         {/* Photo Slider Section */}
         <section className="w-full py-12 md:py-24 lg:py-32 bg-background/50 backdrop-blur-sm">
-           <div className="w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_90%,transparent_100%)]">
+           <div className="w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0%,black_10%,black_90%,transparent_100%)] scroller">
             <div className="flex animate-up-scroll">
               {[...galleryItems, ...galleryItems].map((item, index) => (
                 <Card key={index} className="mx-4 w-80 shrink-0 bg-secondary/50 border-accent/30 shadow-lg shadow-accent/10 hover:border-accent hover:shadow-accent/20 transition-all duration-300 animate-subtle-glow">
