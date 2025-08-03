@@ -67,27 +67,27 @@ export default function Home() {
   const achievements = [
     {
       img: "/nawaz.png",
-      dataAiHint: "Google Cloud Agentic AI Day Hackathon 2025",
+      dataAiHint: "Google Cloud hackathon winner",
       desc: "Awarded 'Break Through Concept Award' for Project AI-Charya.",
     },
     {
-      img: "https://placehold.co/600x400.png",
-      dataAiHint: "code screen",
+      img: "/nawaz.png",
+      dataAiHint: "developer award",
       desc: "Lead developer on a project that reached 1 million active users.",
     },
     {
-      img: "https://placehold.co/600x400.png",
-      dataAiHint: "team collaboration",
+      img: "/nawaz.png",
+      dataAiHint: "hackathon winner",
       desc: "Successfully managed and delivered three major products ahead of schedule.",
     },
     {
-      img: "https://placehold.co/600x400.png",
-      dataAiHint: "presentation stage",
+      img: "/nawaz.png",
+      dataAiHint: "developer award",
       desc: "Keynote speaker at the International Developer Conference 2023.",
     },
     {
-      img: "https://placehold.co/600x400.png",
-      dataAiHint: "open source logo",
+      img: "/nawaz.png",
+      dataAiHint: "hackathon winner",
       desc: "Top contributor to a popular open-source machine learning library.",
     },
   ];
