@@ -26,7 +26,7 @@ export default function RootLayout({
     <html lang="en" className="dark scroll-smooth">
       <body
         className={cn(
-          "min-h-screen bg-transparent font-body antialiased",
+          "min-h-screen bg-transparent font-body antialiased bg-animated-gradient",
           inter.variable,
           spaceGrotesk.variable
         )}

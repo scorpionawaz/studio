@@ -25,7 +25,7 @@ export default function Header() {
               Nawaz Sayyad
             </span>
           </Link>
-          <nav className="flex items-center space-x-2 text-sm font-medium">
+          <nav className="flex items-center space-x-2 text-base font-medium">
              <Link
               href="/"
               className="transition-all duration-300 text-foreground/80 hover:text-accent px-4 py-2 rounded-md inline-block hover:scale-110"
