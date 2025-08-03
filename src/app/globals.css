@@ -103,50 +103,39 @@
 
 @keyframes glitch {
     0% {
-      transform: translate(0, 0) skew(0deg);
-      opacity: 1;
       text-shadow: 
-        1px 1px 0px hsl(var(--accent) / 0.7), 
-        -1px -1px 0px hsl(var(--primary) / 0.7);
+        1px 1px 0px hsl(var(--primary) / 0.7), 
+        -1px -1px 0px hsl(var(--accent) / 0.7);
+      transform: translate(0, 0) skew(0deg);
     }
-    10% {
-      transform: translate(-2px, -1px) skew(-3deg);
-    }
-    20% {
-      transform: translate(1px, 2px) skew(3deg);
-    }
-    30% {
-      transform: translate(-2px, 1px) skew(-2deg);
-    }
-    40% {
-       transform: translate(2px, -2px) skew(2deg);
+    25% {
+      text-shadow: 
+        -2px 2px 0px hsl(var(--primary) / 0.7), 
+        2px -2px 0px hsl(var(--accent) / 0.7);
+      transform: translate(1px, -1px) skew(-5deg);
     }
     50% {
-      transform: translate(-1px, 2px) skew(-1deg);
+      text-shadow: 
+        2px -2px 0px hsl(var(--primary) / 0.7), 
+        -2px 2px 0px hsl(var(--accent) / 0.7);
+      transform: translate(-1px, 1px) skew(5deg);
     }
-    60% {
-      transform: translate(2px, 1px) skew(1deg);
-    }
-    70% {
-      transform: translate(-2px, -1px) skew(-3deg);
-    }
-    80% {
-      transform: translate(1px, 2px) skew(3deg);
-    }
-    90% {
-      transform: translate(0, 0) skew(0deg);
-      opacity: 0.8;
+    75% {
+      text-shadow: 
+        -1px -1px 0px hsl(var(--primary) / 0.7), 
+        1px 1px 0px hsl(var(--accent) / 0.7);
+      transform: translate(1px, -1px) skew(-3deg);
     }
     100% {
-      transform: translate(0, 0) skew(0deg);
-      opacity: 1;
       text-shadow: none;
+      transform: translate(0, 0) skew(0deg);
     }
 }
 
 .animate-glitch {
-    animation: glitch 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation: glitch 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
+
 
 @keyframes subtle-glow {
   0%, 100% {
