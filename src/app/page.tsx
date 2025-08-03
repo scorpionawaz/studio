@@ -10,6 +10,104 @@ import { MoveRight } from "lucide-react";
 import KeyAchievements from "@/components/key-achievements";
 
 
+const techIcons = [
+  // Python
+  { d: "M12.23,8.42L15.05,5.6L12.23,2.78L15.05,0H21.2V6.15L18.38,8.97L21.2,11.8V18H15.05L12.23,15.18L9.4,18H3.25V11.8L6.07,8.97L3.25,6.15V0H9.4L12.23,2.78L9.4,5.6L12.23,8.42ZM18.38,2.78V6.15L15.05,9.49V12.23L18.38,15.18V12.23H21.2V9.4H18.38V6.15H15.05L18.38,2.78ZM6.07,2.78L9.4,6.15V9.4H6.07V12.23L9.4,15.18V12.23H12.23V9.4H9.4V6.15L6.07,2.78Z", viewBox: "0 0 24 18" },
+  // React
+  { d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5.29-8.71a.996.996 0 0 1 1.41 0l3.59 3.59 8.29-8.29a.996.996 0 1 1 1.41 1.41l-9 9a.996.996 0 0 1-1.41 0l-4.29-4.29a.996.996 0 0 1 0-1.41z", viewBox: "0 0 24 24" },
+  // Django
+  { d: "M4 2h16v2H4zM4 6h16v2H4zm0 4h16v2H4zm0 4h16v2H4zm0 4h16v2H4z", viewBox: "0 0 24 24"},
+  // Flask
+  { d: "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5-10-5-10 5z", viewBox: "0 0 24 24"},
+  // AWS
+  { d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z", viewBox: "0 0 24 24" },
+  // LLM - using a brain icon
+  { d: "M12 2C9.24 2 7 4.24 7 7v3.5c0 .28-.22.5-.5.5s-.5-.22-.5-.5V7c0-3.31 2.69-6 6-6s6 2.69 6 6v3.5c0 .28-.22.5-.5.5s-.5-.22-.5-.5V7c0-2.76-2.24-5-5-5zm-5 8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zm10 0c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z", viewBox: "0 0 24 24" },
+  // Next.js - simple N
+  { d: "M10 4H4v16h6v-6.81l6 6.81V4h-6v6.19L8.19 4H10z", viewBox: "0 0 24 24"}
+];
+
+const SvgIcon = ({ d, size = 48, viewBox="0 0 24 24" }: { d: string; size?: number, viewBox?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox={viewBox}
+    fill="currentColor"
+    className="text-accent/20"
+  >
+    <path d={d} />
+  </svg>
+);
+
+const FloatingIcons = () => {
+    const [icons, setIcons] = React.useState<any[]>([]);
+    const containerRef = React.useRef<HTMLDivElement>(null);
+
+    React.useEffect(() => {
+        const generatedIcons = techIcons.map((icon, index) => {
+            const angle = (index / techIcons.length) * 2 * Math.PI;
+            const speed = 0.01 + Math.random() * 0.01;
+            const initialRadius = 150 + Math.random() * 50; 
+            return { 
+                ...icon, 
+                angle, 
+                speed, 
+                radius: initialRadius, 
+                initialRadius, 
+                size: 24 + Math.random() * 24 
+            };
+        });
+        setIcons(generatedIcons);
+
+        let animationFrameId: number;
+        const animate = () => {
+            setIcons(prevIcons => 
+                prevIcons.map(icon => ({
+                    ...icon,
+                    angle: icon.angle + icon.speed,
+                    radius: icon.initialRadius + Math.sin(icon.angle * 2) * 20,
+                }))
+            );
+            animationFrameId = requestAnimationFrame(animate);
+        };
+        animationFrameId = requestAnimationFrame(animate);
+
+        return () => cancelAnimationFrame(animationFrameId);
+    }, []);
+
+    const getPosition = (angle: number, radius: number) => {
+        if (!containerRef.current) return { x: 0, y: 0 };
+        const { width, height } = containerRef.current.getBoundingClientRect();
+        const x = width / 2 + radius * Math.cos(angle);
+        const y = height / 2 + radius * Math.sin(angle);
+        return { x, y };
+    };
+    
+    return (
+        <div ref={containerRef} className="absolute inset-0 w-full h-full">
+            {icons.map((icon, index) => {
+                const { x, y } = getPosition(icon.angle, icon.radius);
+                return (
+                    <div
+                        key={index}
+                        className="absolute"
+                        style={{
+                            left: x,
+                            top: y,
+                            transform: 'translate(-50%, -50%)',
+                            transition: 'left 0.1s linear, top 0.1s linear',
+                        }}
+                    >
+                        <SvgIcon d={icon.d} size={icon.size} viewBox={icon.viewBox}/>
+                    </div>
+                );
+            })}
+        </div>
+    );
+};
+
+
 export default function Home() {
   const achievements = [
     {
@@ -64,6 +162,7 @@ export default function Home() {
           <div className="container px-4 md:px-6 grid md:grid-cols-2 gap-16 items-center">
             {/* Left Column: Text Content */}
             <div className="relative flex flex-col space-y-6 text-left h-full justify-center">
+               <FloatingIcons />
               <div className="relative z-10">
                 <h1 className="font-headline text-5xl font-bold tracking-tighter sm:text-6xl xl:text-8xl/none">
                   Nawaz Sayyad
@@ -129,3 +228,4 @@ export default function Home() {
     
 
 }
+
