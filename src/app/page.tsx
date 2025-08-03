@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -21,6 +21,8 @@ const icons = [
   { icon: <BrainCircuit className="h-10 w-10 text-accent" />, name: "LLMs" },
   { icon: <ShieldCheck className="h-10 w-10 text-accent" />, name: "Security" },
   { icon: <TerminalSquare className="h-10 w-10 text-accent" />, name: "SDKs" },
+  { icon: <Code className="h-10 w-10 text-accent" />, name: "Next.js" },
+  { icon: <BrainCircuit className="h-10 w-10 text-accent" />, name: "AI" },
 ];
 
 const achievementsData = [
@@ -56,9 +58,59 @@ const achievementsData = [
   },
 ];
 
+// Particle Component
+const Particle = ({ onComplete }: { onComplete: () => void }) => {
+  const timeToLive = 1000;
+  
+  useEffect(() => {
+    const timer = setTimeout(onComplete, timeToLive);
+    return () => clearTimeout(timer);
+  }, [onComplete]);
+
+  const style: React.CSSProperties = {
+    position: 'absolute',
+    left: `${Math.random() * 100}%`,
+    top: `${Math.random() * 100}%`,
+    width: `${Math.random() * 5 + 2}px`,
+    height: `${Math.random() * 5 + 2}px`,
+    background: `hsl(${Math.random() * 360}, 100%, 70%)`,
+    borderRadius: '50%',
+    animation: `particle-burst ${timeToLive / 1000}s ease-out forwards`,
+  };
+
+  return <div style={style}></div>;
+};
+
+// Celebration Effect Component
+const CelebrationEffect = ({ trigger }: { trigger: any }) => {
+  const [particles, setParticles] = useState<number[]>([]);
+
+  useEffect(() => {
+    if (trigger > 0) {
+      const newParticles = Array.from({ length: 30 }, (_, i) => Date.now() + i);
+      setParticles(newParticles);
+    }
+  }, [trigger]);
+
+  const handleComplete = (id: number) => {
+    setParticles(prev => prev.filter(pId => pId !== id));
+  };
+
+  return (
+    <div className="absolute inset-0 pointer-events-none">
+      {particles.map((id) => (
+        <Particle key={id} onComplete={() => handleComplete(id)} />
+      ))}
+    </div>
+  );
+};
+
+
 export default function Home() {
   const [api, setApi] = useState<EmblaCarouselType>();
   const [current, setCurrent] = useState(0);
+  const [celebrationTrigger, setCelebrationTrigger] = useState(0);
+  const carouselWrapperRef = useRef<HTMLDivElement>(null);
 
   const scrollNext = useCallback(() => {
     if (api) {
@@ -72,21 +124,25 @@ export default function Home() {
     }
 
     const onSelect = () => {
-      setCurrent(api.selectedScrollSnap());
+      const newIndex = api.selectedScrollSnap();
+      if(newIndex !== current) {
+         setCurrent(newIndex);
+         setCelebrationTrigger(prev => prev + 1);
+      }
     };
 
     api.on("select", onSelect);
-    onSelect(); // Set initial state
+    onSelect();
 
     const interval = setInterval(() => {
       scrollNext();
-    }, 2000);
+    }, 3000);
 
     return () => {
       clearInterval(interval);
       api.off("select", onSelect);
     };
-  }, [api, scrollNext]);
+  }, [api, scrollNext, current]);
   
   return (
     <div className="flex flex-col min-h-screen">
@@ -95,16 +151,16 @@ export default function Home() {
         <section className="w-full h-screen flex items-center bg-background relative overflow-hidden">
            <div className="absolute inset-0 bg-grid-zinc-800/20 [mask-image:linear-gradient(to_bottom,white_10%,transparent_70%)]"></div>
           
-           {/* Floating Icons */}
-           <div className="absolute inset-0 z-0">
+           {/* Falling Icons */}
+           <div className="absolute inset-0 z-0 w-full h-full overflow-hidden">
             {icons.map((item, index) => (
                 <div
-                key={item.name}
-                className="absolute animate-float"
+                key={index}
+                className="absolute animate-fall"
                 style={{
-                    top: `${10 + index * 20}%`,
-                    left: `${15 + (index % 2) * 50}%`,
-                    animationDelay: `${index * 1.5}s`,
+                    left: `${Math.random() * 100}%`,
+                    animationDelay: `${Math.random() * 10}s`,
+                    animationDuration: `${5 + Math.random() * 5}s`
                 }}
                 >
                 {item.icon}
@@ -151,10 +207,10 @@ export default function Home() {
                     <CarouselContent className="h-full">
                     {achievementsData.map((achievement, index) => (
                         <CarouselItem key={index} className="pt-4 md:basis-1/3">
-                            <div className="p-1 h-full flex items-center justify-center">
+                            <div className="p-1 h-full flex items-center justify-center relative" ref={index === current ? carouselWrapperRef : null}>
                                 <Card
                                     className={cn(
-                                        "w-[80%] h-auto bg-secondary/30 backdrop-blur-sm border-accent/20 overflow-hidden transition-all duration-500 ease-in-out",
+                                        "w-[80%] h-auto bg-card/30 backdrop-blur-md border border-accent/20 overflow-hidden transition-all duration-500 ease-in-out shadow-lg shadow-accent/10",
                                         index === current ? "scale-110 opacity-100" : "scale-75 opacity-40"
                                     )}
                                 >
@@ -173,6 +229,7 @@ export default function Home() {
                                       </div>
                                     </CardContent>
                                 </Card>
+                                 {index === current && <CelebrationEffect trigger={celebrationTrigger} />}
                             </div>
                         </CarouselItem>
                     ))}
