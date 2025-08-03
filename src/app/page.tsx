@@ -66,7 +66,7 @@ const FallingIcons = () => {
 export default function Home() {
   const achievements = [
     {
-      img: "nawaz.png",
+      img: "src/app/page.tsx",
       dataAiHint: "Google Cloud Agentic AI Day Hackathon 2025",
       desc: "Awarded 'Break Through Concept Award' for Project AI-Charya.",
     },
