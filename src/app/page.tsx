@@ -47,7 +47,7 @@ const IconRain = () => {
                 style: {
                     left: `${Math.random() * 100}vw`,
                     animationDuration: `${5 + Math.random() * 5}s`,
-                    animationDelay: `${Math.random() * 5}s`,
+                    animationDelay: `-${Math.random() * 10}s`,
                     transform: `scale(${0.5 + Math.random() * 0.5})`,
                 },
             };
