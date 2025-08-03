@@ -243,19 +243,31 @@
         1px 1px 0px hsl(var(--accent) / 0.7), 
         -1px -1px 0px hsl(var(--primary) / 0.7);
     }
-    15% {
-      transform: translate(-1px, 1px) skew(2deg);
+    10% {
+      transform: translate(-2px, -1px) skew(-3deg);
+    }
+    20% {
+      transform: translate(1px, 2px) skew(3deg);
     }
     30% {
-      transform: translate(1px, -1px) skew(-2deg);
+      transform: translate(-2px, 1px) skew(-2deg);
     }
-    45% {
-      transform: translate(-1px, -1px) skew(1deg);
+    40% {
+       transform: translate(2px, -2px) skew(2deg);
+    }
+    50% {
+      transform: translate(-1px, 2px) skew(-1deg);
     }
     60% {
-      transform: translate(1px, 1px) skew(-1deg);
+      transform: translate(2px, 1px) skew(1deg);
     }
-    75% {
+    70% {
+      transform: translate(-2px, -1px) skew(-3deg);
+    }
+    80% {
+      transform: translate(1px, 2px) skew(3deg);
+    }
+    90% {
       transform: translate(0, 0) skew(0deg);
       opacity: 0.8;
     }

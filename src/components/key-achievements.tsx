@@ -11,7 +11,7 @@ const achievements = [
   "Regional Demo Day Pune SBI LIFE Hackathon (Only Solo Competitor)",
 ];
 
-const particleCount = 20;
+const particleCount = 40;
 
 const Particles = ({ active }: { active: boolean }) => {
   if (!active) return null;
@@ -71,7 +71,7 @@ const KeyAchievements = () => {
   
       }, 600); // This should match the glitch animation duration
   
-    }, 5000); // Slower cycle: 5 seconds total
+    }, 5000);
   
     return () => clearInterval(interval);
   }, []);
@@ -81,7 +81,7 @@ const KeyAchievements = () => {
         <div 
             key={key}
             className={cn(
-                "text-center text-2xl md:text-3xl font-headline font-bold text-foreground/90",
+                "text-center text-2xl md:text-3xl font-headline font-bold text-foreground/90 uppercase",
                 isAnimating && "animate-glitch"
             )}
              style={{
