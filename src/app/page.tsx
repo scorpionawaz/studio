@@ -117,7 +117,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
        <KeyAchievements />
       <main className="flex-1">
-        <section className="w-full h-[calc(100vh-80px)] flex items-center bg-background relative overflow-hidden">
+        <section id="achievements" className="w-full h-[calc(100vh-80px)] flex items-center bg-background relative overflow-hidden">
           <div className="container px-4 md:px-6 grid md:grid-cols-2 gap-16 items-center z-10">
             {/* Left Column: Text Content & Floating Icons */}
             <div className="relative flex flex-col space-y-6 text-left h-full justify-center">

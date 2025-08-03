@@ -4,9 +4,16 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Github, Linkedin, Menu, Mountain } from "lucide-react";
 
 export default function Header() {
+  const navLinks = [
+    { href: "/#achievements", text: "Achievements" },
+    { href: "/projects", text: "Projects" },
+    { href: "/researches", text: "Researches" },
+    { href: "/opensource", text: "Open Source" },
+  ];
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-lg">
-      <div className="container flex h-14 items-center">
+      <div className="container flex h-20 items-center">
         <div className="mr-4 hidden md:flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
             <Mountain className="h-6 w-6 text-accent" />
@@ -15,18 +22,21 @@ export default function Header() {
             </span>
           </Link>
           <nav className="flex items-center space-x-6 text-sm font-medium">
-            <Link
+             <Link
               href="/"
-              className="transition-colors hover:text-accent-foreground text-foreground/60"
+              className="transition-all duration-300 hover:text-accent-foreground text-foreground/60 hover:text-accent hover:drop-shadow-[0_0_5px_hsl(var(--accent))]"
             >
               Home
             </Link>
-            <Link
-              href="/projects"
-              className="transition-colors hover:text-accent-foreground text-foreground/60"
-            >
-              Projects
-            </Link>
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="transition-all duration-300 hover:text-accent-foreground text-foreground/60 hover:text-accent hover:drop-shadow-[0_0_5px_hsl(var(--accent))]"
+              >
+                {link.text}
+              </Link>
+            ))}
           </nav>
         </div>
 
@@ -50,12 +60,15 @@ export default function Header() {
               >
                 Home
               </Link>
-              <Link
-                href="/projects"
-                className="flex w-full items-center py-2 text-lg font-semibold"
-              >
-                Projects
-              </Link>
+              {navLinks.map((link) => (
+                 <Link
+                    key={link.href}
+                    href={link.href}
+                    className="flex w-full items-center py-2 text-lg font-semibold"
+                >
+                    {link.text}
+                </Link>
+              ))}
             </div>
           </SheetContent>
         </Sheet>
