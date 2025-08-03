@@ -12,7 +12,7 @@ export default function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-lg">
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur-lg">
       <div className="container flex h-24 items-center">
         <div className="mr-4 hidden md:flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
@@ -48,7 +48,7 @@ export default function Header() {
               <span className="sr-only">Toggle navigation menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="bg-background/80 backdrop-blur-lg">
+          <SheetContent side="left" className="bg-background/95 backdrop-blur-lg">
             <Link href="/" className="mr-6 flex items-center space-x-2">
               <Mountain className="h-6 w-6 text-accent" />
               <span className="font-bold font-headline">Evolvefolio</span>
