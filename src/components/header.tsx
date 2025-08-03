@@ -48,7 +48,7 @@ export default function Header() {
               <span className="sr-only">Toggle navigation menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="bg-background">
+          <SheetContent side="left" className="bg-background/80 backdrop-blur-lg">
             <Link href="/" className="mr-6 flex items-center space-x-2">
               <Mountain className="h-6 w-6 text-accent" />
               <span className="font-bold font-headline">Evolvefolio</span>
