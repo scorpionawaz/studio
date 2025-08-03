@@ -105,6 +105,38 @@ const CelebrationEffect = ({ trigger }: { trigger: any }) => {
   );
 };
 
+// Falling Icons Component to prevent hydration errors
+const FallingIcons = () => {
+  const [iconStyles, setIconStyles] = useState<React.CSSProperties[]>([]);
+
+  useEffect(() => {
+    const styles = icons.map(() => ({
+      left: `${Math.random() * 100}%`,
+      animationDelay: `${Math.random() * 10}s`,
+      animationDuration: `${5 + Math.random() * 5}s`,
+    }));
+    setIconStyles(styles);
+  }, []);
+
+  if (iconStyles.length === 0) {
+    return null; // Render nothing on the server and initial client render
+  }
+
+  return (
+    <div className="absolute inset-0 z-0 w-full h-full overflow-hidden">
+      {icons.map((item, index) => (
+        <div
+          key={index}
+          className="absolute animate-fall"
+          style={iconStyles[index]}
+        >
+          {item.icon}
+        </div>
+      ))}
+    </div>
+  );
+};
+
 
 export default function Home() {
   const [api, setApi] = useState<EmblaCarouselType>();
@@ -153,21 +185,7 @@ export default function Home() {
             {/* Left Column: Text Content & Falling Icons */}
             <div className="relative flex flex-col space-y-6 text-left h-full justify-center">
               {/* Falling Icons Container */}
-              <div className="absolute inset-0 z-0 w-full h-full overflow-hidden">
-                {icons.map((item, index) => (
-                    <div
-                    key={index}
-                    className="absolute animate-fall"
-                    style={{
-                        left: `${Math.random() * 100}%`,
-                        animationDelay: `${Math.random() * 10}s`,
-                        animationDuration: `${5 + Math.random() * 5}s`
-                    }}
-                    >
-                    {item.icon}
-                    </div>
-                ))}
-              </div>
+              <FallingIcons />
 
               <div className="relative z-10">
                  <h1 className="font-headline text-5xl font-bold tracking-tighter sm:text-6xl xl:text-8xl/none bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-500">
@@ -326,3 +344,5 @@ export default function Home() {
       </main>
     </div>
   );
+
+    
