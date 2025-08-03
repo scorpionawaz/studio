@@ -11,7 +11,7 @@ const achievements = [
   "Regional Demo Day Pune SBI LIFE Hackathon (Only Solo Competitor)",
 ];
 
-const particleCount = 40;
+const particleCount = 80;
 
 const Particles = ({ active }: { active: boolean }) => {
   if (!active) return null;
@@ -24,6 +24,7 @@ const Particles = ({ active }: { active: boolean }) => {
         const style = {
           "--x": x,
           "--y": y,
+          left: `${10 + Math.random() * 80}%`, // Distribute horizontally
           animationDelay: `${Math.random() * 200}ms`,
         } as React.CSSProperties;
 

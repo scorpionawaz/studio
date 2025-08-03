@@ -212,7 +212,7 @@
 .particle {
     position: absolute;
     top: 50%;
-    left: 50%;
+    /* left is now set inline */
     opacity: 0;
     animation: particle-burst 800ms ease-out forwards;
     color: hsl(var(--accent));
