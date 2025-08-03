@@ -64,51 +64,7 @@ const FallingIcons = () => {
 
 
 export default function Home() {
-  const achievements = [
-    {
-      img: "https://placehold.co/600x400.png",
-      dataAiHint: "Google Cloud Agentic AI Day Hackathon 2025",
-      desc: "Awarded 'Break Through Concept Award' for Project AI-Charya.",
-    },
-    {
-      img: "https://placehold.co/600x400.png",
-      dataAiHint: "code screen",
-      desc: "Lead developer on a project that reached 1 million active users.",
-    },
-    {
-      img: "https://placehold.co/600x400.png",
-      dataAiHint: "team collaboration",
-      desc: "Successfully managed and delivered three major products ahead of schedule.",
-    },
-    {
-      img: "https://placehold.co/600x400.png",
-      dataAiHint: "presentation stage",
-      desc: "Keynote speaker at the International Developer Conference 2023.",
-    },
-    {
-      img: "https://placehold.co/600x400.png",
-      dataAiHint: "open source logo",
-      desc: "Top contributor to a popular open-source machine learning library.",
-    },
-  ];
   
-  const [currentIndex, setCurrentIndex] = React.useState(0);
-  const [isMounted, setIsMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  React.useEffect(() => {
-     if (!isMounted) return;
-
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % achievements.length);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [isMounted, achievements.length]);
-
   return (
     <div className="flex flex-col min-h-screen bg-background/95">
        <KeyAchievements />
@@ -143,38 +99,19 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Column: Achievement Carousel */}
+            {/* Right Column: Profile Picture */}
             <div className="h-[500px] flex items-center justify-center relative overflow-hidden">
-               <div className="absolute w-full h-full flex items-center justify-center">
-                    {isMounted && achievements.map((achievement, index) => (
-                        <div
-                            key={index}
-                            className="absolute w-[450px] transition-all duration-700 ease-in-out"
-                            style={{
-                                transform: `translateX(${(index - currentIndex) * 100}%) scale(${1 - Math.abs(index - currentIndex) * 0.2})`,
-                                opacity: Math.abs(index - currentIndex) < 2 ? 1 : 0,
-                                zIndex: achievements.length - Math.abs(index - currentIndex),
-                            }}
-                        >
-                            <Card className="overflow-hidden bg-secondary/30 backdrop-blur-sm border-accent/20 animate-subtle-glow">
-                                <CardContent className="p-0">
-                                    <Image
-                                        src={achievement.img}
-                                        alt={achievement.desc}
-                                        width={600}
-                                        height={400}
-                                        data-ai-hint={achievement.dataAiHint}
-                                        className="w-full h-auto object-cover aspect-[4/3]"
-                                    />
-                                    <div className="p-4">
-                                        <p className="text-muted-foreground text-sm text-center">
-                                            {achievement.desc}
-                                        </p>
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </div>
-                    ))}
+               <div className="w-[450px] h-[450px] relative">
+                  <Card className="h-full w-full overflow-hidden rounded-full bg-secondary/30 backdrop-blur-sm border-accent/20 animate-subtle-glow p-4">
+                    <Image
+                        src="/nawaz.png"
+                        alt="Nawaz Sayyad"
+                        width={450}
+                        height={450}
+                        className="w-full h-full object-cover rounded-full"
+                        priority
+                    />
+                  </Card>
                 </div>
             </div>
           </div>
@@ -182,7 +119,6 @@ export default function Home() {
       </main>
     </div>
   );
+}
 
     
-
-}
