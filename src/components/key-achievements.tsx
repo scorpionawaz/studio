@@ -23,12 +23,15 @@ const KeyAchievements = () => {
   }, []);
 
   return (
-    <div className="bg-secondary border-b border-border/40 w-full h-20 flex items-center justify-center overflow-hidden">
+    <div className="w-full h-20 flex items-center justify-center overflow-hidden">
         <div 
             key={key}
             className={cn(
-                "text-center text-lg md:text-xl font-semibold text-foreground/80 animate-glitch"
+                "text-center text-2xl md:text-3xl font-headline font-bold text-foreground/90 animate-glitch"
             )}
+             style={{
+                textShadow: '0 0 8px hsl(var(--accent) / 0.8), 0 0 16px hsl(var(--accent) / 0.5)',
+            }}
         >
             <p>{achievements[index]}</p>
         </div>
