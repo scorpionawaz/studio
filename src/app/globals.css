@@ -68,17 +68,6 @@
         transparent 50%
       );
     background-color: hsl(var(--background));
-    animation: background-pan 30s linear infinite;
-    background-size: 200% 200%;
-  }
-}
-
-@keyframes background-pan {
-  from {
-    background-position: 0% 0%;
-  }
-  to {
-    background-position: -200% 0%;
   }
 }
 
