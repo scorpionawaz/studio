@@ -38,7 +38,7 @@ const FallingIcons = () => {
     setStyles(
       icons.map(() => ({
         left: `${Math.random() * 100}%`,
-        animationDelay: `${Math.random() * 20}s`,
+        animationDelay: `-${Math.random() * 25}s`,
         animationDuration: `${15 + Math.random() * 10}s`,
       }))
     );
@@ -182,4 +182,5 @@ export default function Home() {
       </main>
     </div>
   );
-}
+
+    
