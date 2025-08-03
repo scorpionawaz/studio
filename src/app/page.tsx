@@ -27,31 +27,31 @@ const icons = [
 
 const achievementsData = [
   {
-    imageUrl: "https://placehold.co/400x600.png",
+    imageUrl: "https://placehold.co/400x300.png",
     hint: "award certificate",
     title: "Innovative Project Award",
     description: "Recognized for developing a groundbreaking AI-driven data analysis tool.",
   },
   {
-    imageUrl: "https://placehold.co/400x600.png",
+    imageUrl: "https://placehold.co/400x300.png",
     hint: "team collaboration",
     title: "Top Performer Recognition",
     description: "Awarded for exceptional performance and leadership in a fast-paced team environment.",
   },
   {
-    imageUrl: "https://placehold.co/400x600.png",
+    imageUrl: "https://placehold.co/400x300.png",
     hint: "github contribution graph",
     title: "Open Source Contributor",
     description: "Active contributor to major open-source projects, including React and Next.js.",
   },
   {
-    imageUrl: "https://placehold.co/400x600.png",
+    imageUrl: "https://placehold.co/400x300.png",
     hint: "public speaking tech",
     title: "Tech Conference Speaker",
     description: "Invited to speak at international conferences on the future of web development.",
   },
   {
-    imageUrl: "https://placehold.co/400x600.png",
+    imageUrl: "https://placehold.co/400x300.png",
     hint: "hackathon winner",
     title: "Hackathon Winner",
     description: "First place in a 24-hour hackathon for creating a real-time collaborative coding app.",
@@ -151,49 +151,51 @@ export default function Home() {
         <section className="w-full h-screen flex items-center bg-background relative overflow-hidden">
            <div className="absolute inset-0 bg-grid-zinc-800/20 [mask-image:linear-gradient(to_bottom,white_10%,transparent_70%)]"></div>
           
-           {/* Falling Icons */}
-           <div className="absolute inset-0 z-0 w-full h-full overflow-hidden">
-            {icons.map((item, index) => (
-                <div
-                key={index}
-                className="absolute animate-fall"
-                style={{
-                    left: `${Math.random() * 100}%`,
-                    animationDelay: `${Math.random() * 10}s`,
-                    animationDuration: `${5 + Math.random() * 5}s`
-                }}
-                >
-                {item.icon}
-                </div>
-            ))}
-          </div>
-
-
           <div className="container px-4 md:px-6 grid md:grid-cols-2 gap-8 items-center z-10">
-            {/* Left Column: Text Content */}
-            <div className="flex flex-col space-y-6 text-left">
-              <h1 className="font-headline text-5xl font-bold tracking-tighter sm:text-6xl xl:text-8xl/none bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-500">
-                John Doe
-              </h1>
-              <p className="text-2xl text-accent font-medium tracking-wider">
-                Greater Software Developer
-              </p>
-              <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                I build beautiful, responsive, and highly performant web
-                applications with a focus on user experience and clean code.
-              </p>
-              <div className="flex justify-start gap-4">
-                <Link href="/projects">
-                  <Button size="lg" variant="outline" className="hover:animate-electric-shock">
-                    View My Work
-                    <MoveRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </Link>
+            {/* Left Column: Text Content & Falling Icons */}
+            <div className="relative flex flex-col space-y-6 text-left h-full">
+              {/* Falling Icons Container */}
+              <div className="absolute inset-0 z-0 w-full h-full overflow-hidden">
+                {icons.map((item, index) => (
+                    <div
+                    key={index}
+                    className="absolute animate-fall"
+                    style={{
+                        left: `${Math.random() * 100}%`,
+                        animationDelay: `${Math.random() * 10}s`,
+                        animationDuration: `${5 + Math.random() * 5}s`
+                    }}
+                    >
+                    {item.icon}
+                    </div>
+                ))}
               </div>
+
+              <div className="relative z-10">
+                 <h1 className="font-headline text-5xl font-bold tracking-tighter sm:text-6xl xl:text-8xl/none bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-500">
+                    John Doe
+                  </h1>
+                  <p className="text-2xl text-accent font-medium tracking-wider">
+                    Greater Software Developer
+                  </p>
+                  <p className="max-w-[600px] text-muted-foreground md:text-xl">
+                    I build beautiful, responsive, and highly performant web
+                    applications with a focus on user experience and clean code.
+                  </p>
+                  <div className="flex justify-start gap-4 mt-6">
+                    <Link href="/projects">
+                      <Button size="lg" variant="outline" className="hover:animate-electric-shock">
+                        View My Work
+                        <MoveRight className="ml-2 h-5 w-5" />
+                      </Button>
+                    </Link>
+                  </div>
+              </div>
+
             </div>
 
             {/* Right Column: Achievements Carousel */}
-            <div className="h-[600px] flex items-center justify-center">
+            <div className="h-full flex items-center justify-center">
                  <Carousel
                     setApi={setApi}
                     opts={{
@@ -202,7 +204,7 @@ export default function Home() {
                         axis: 'y',
                     }}
                     orientation="vertical"
-                    className="w-full max-w-md h-full"
+                    className="w-full max-w-md h-[500px]"
                 >
                     <CarouselContent className="h-full">
                     {achievementsData.map((achievement, index) => (
@@ -210,7 +212,7 @@ export default function Home() {
                             <div className="p-1 h-full flex items-center justify-center relative" ref={index === current ? carouselWrapperRef : null}>
                                 <Card
                                     className={cn(
-                                        "w-[80%] h-auto bg-card/30 backdrop-blur-md border border-accent/20 overflow-hidden transition-all duration-500 ease-in-out shadow-lg shadow-accent/10",
+                                        "w-[90%] h-auto bg-card/30 backdrop-blur-md border border-accent/20 overflow-hidden transition-all duration-500 ease-in-out shadow-lg shadow-accent/10",
                                         index === current ? "scale-110 opacity-100" : "scale-75 opacity-40"
                                     )}
                                 >
@@ -219,9 +221,9 @@ export default function Home() {
                                           src={achievement.imageUrl}
                                           alt={achievement.title}
                                           width={400}
-                                          height={600}
+                                          height={300}
                                           data-ai-hint={achievement.hint}
-                                          className="w-full h-auto object-cover"
+                                          className="w-full h-auto object-cover aspect-[4/3]"
                                       />
                                       <div className="p-4 text-center">
                                           <h3 className="font-bold text-lg text-primary">{achievement.title}</h3>
