@@ -72,22 +72,22 @@ export default function Home() {
       desc: "Awarded 'Break Through Concept Award' for Project AI-Charya.",
     },
     {
-      img: "/nawaz.png",
+      img: "https://placehold.co/600x400.png",
       dataAiHint: "developer award",
       desc: "Lead developer on a project that reached 1 million active users.",
     },
     {
-      img: "/nawaz.png",
+      img: "https://placehold.co/600x400.png",
       dataAiHint: "hackathon winner",
       desc: "Successfully managed and delivered three major products ahead of schedule.",
     },
     {
-      img: "/nawaz.png",
+      img: "https://placehold.co/600x400.png",
       dataAiHint: "developer award",
       desc: "Keynote speaker at the International Developer Conference 2023.",
     },
     {
-      img: "/nawaz.png",
+      img: "https://placehold.co/600x400.png",
       dataAiHint: "hackathon winner",
       desc: "Top contributor to a popular open-source machine learning library.",
     },
