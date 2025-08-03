@@ -24,7 +24,7 @@ export default function Header() {
           <nav className="flex items-center space-x-2 text-sm font-medium">
              <Link
               href="/"
-              className="transition-all duration-300 text-foreground/80 hover:text-accent-foreground px-4 py-2 rounded-md hover:bg-accent/20 hover:drop-shadow-[0_0_5px_hsl(var(--accent))]"
+              className="transition-all duration-300 text-foreground/80 hover:text-accent px-4 py-2 rounded-md inline-block hover:scale-110"
             >
               Home
             </Link>
@@ -32,7 +32,7 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="transition-all duration-300 text-foreground/80 hover:text-accent-foreground px-4 py-2 rounded-md hover:bg-accent/20 hover:drop-shadow-[0_0_5px_hsl(var(--accent))]"
+                className="transition-all duration-300 text-foreground/80 hover:text-accent px-4 py-2 rounded-md inline-block hover:scale-110"
               >
                 {link.text}
               </Link>
