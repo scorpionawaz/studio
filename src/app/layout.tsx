@@ -13,7 +13,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Evolvefolio - Showcase of a Modern Developer",
+  title: "Nawaz Sayyad - Showcase of a Modern Developer",
   description: "A dynamic portfolio built with Next.js, featuring interactive UI, project showcases, and more.",
 };
 

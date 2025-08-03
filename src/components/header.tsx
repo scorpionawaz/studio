@@ -1,7 +1,11 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Github, Linkedin, Menu, Mountain } from "lucide-react";
+import { Github, Linkedin, Menu } from "lucide-react";
+
+const Logo = () => (
+  <div className="text-2xl font-bold text-accent">&lt;/&gt;</div>
+);
 
 export default function Header() {
   const navLinks = [
@@ -16,9 +20,9 @@ export default function Header() {
       <div className="container flex h-24 items-center">
         <div className="mr-4 hidden md:flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
-            <Mountain className="h-6 w-6 text-accent" />
+            <Logo />
             <span className="hidden font-bold sm:inline-block font-headline">
-              Evolvefolio
+              Nawaz Sayyad
             </span>
           </Link>
           <nav className="flex items-center space-x-2 text-sm font-medium">
@@ -50,8 +54,8 @@ export default function Header() {
           </SheetTrigger>
           <SheetContent side="left" className="bg-background/95 backdrop-blur-lg">
             <Link href="/" className="mr-6 flex items-center space-x-2">
-              <Mountain className="h-6 w-6 text-accent" />
-              <span className="font-bold font-headline">Evolvefolio</span>
+              <Logo />
+              <span className="font-bold font-headline">Nawaz Sayyad</span>
             </Link>
             <div className="mt-6 grid gap-2 py-6">
               <Link
