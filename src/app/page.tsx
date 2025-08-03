@@ -71,27 +71,30 @@ export default function Home() {
               <div className="absolute w-[600px] h-[600px] border-2 border-dashed border-accent/20 rounded-full animate-[spin_60s_linear_infinite]">
                 {orbitingSkills.map((skill, index) => {
                   const angle = (index / orbitingSkills.length) * 360;
+                  const animationDelay = `${(60 / orbitingSkills.length) * index * -1}s`;
                   return (
                     <div
                       key={skill.name}
-                      className="absolute top-1/2 left-1/2 -m-12 flex flex-col items-center"
+                      className="absolute top-1/2 left-1/2 -m-16"
                       style={{
-                        transform: `rotate(${angle}deg) translate(300px) rotate(-${angle}deg)`,
+                        transform: `rotate(${angle}deg) translateX(300px)`,
                       }}
                     >
-                      <div className="w-24 h-24 bg-secondary/80 backdrop-blur-sm rounded-full flex items-center justify-center border-2 border-accent/30 shadow-lg hover:border-accent transition-all hover:scale-110">
-                        <skill.icon size={skill.size} className="text-accent" />
+                      <div className="flex flex-col items-center animate-float" style={{ animationDelay }}>
+                        <div className="w-32 h-32 bg-secondary/80 backdrop-blur-sm rounded-full flex items-center justify-center border-2 border-accent/30 shadow-lg hover:border-accent transition-all hover:scale-110">
+                          <skill.icon size={skill.size} className="text-accent" />
+                        </div>
+                        <span className="mt-2 text-sm font-semibold text-primary/80 bg-background/50 px-2 py-1 rounded-full">
+                          {skill.name}
+                        </span>
                       </div>
-                      <span className="mt-2 text-sm font-semibold text-primary/80 bg-background/50 px-2 py-1 rounded-full">
-                        {skill.name}
-                      </span>
                     </div>
                   );
                 })}
               </div>
 
               {/* Central Text */}
-              <div className="text-center z-10 bg-background/50 backdrop-blur-sm p-8 rounded-full border border-zinc-800">
+              <div className="text-center z-10 bg-background/80 backdrop-blur-sm p-8 rounded-full border border-zinc-800">
                 <h1 className="font-headline text-5xl font-bold tracking-tighter sm:text-6xl xl:text-8xl/none bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-500">
                   John Doe
                 </h1>
