@@ -177,7 +177,7 @@ export default function Home() {
                                     maskImage: maskImage,
                                 }}
                             >
-                                <Card className="overflow-hidden bg-secondary/30 backdrop-blur-sm border-accent/20 animate-subtle-glow">
+                                <Card className="overflow-hidden bg-secondary/30 backdrop-blur-sm border-accent/20 animate-electric-shock">
                                     <CardContent className="p-0">
                                         <Image
                                             src={achievement.img}
@@ -205,5 +205,3 @@ export default function Home() {
     </div>
   );
 }
-
-    
