@@ -97,9 +97,14 @@ export default function Home() {
   
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [isMounted, setIsMounted] = React.useState(false);
+  const [glitchKey, setGlitchKey] = React.useState(0);
 
   React.useEffect(() => {
     setIsMounted(true);
+    const glitchInterval = setInterval(() => {
+      setGlitchKey(key => key + 1);
+    }, 5000); // Re-trigger glitch every 5 seconds
+    return () => clearInterval(glitchInterval);
   }, []);
 
   React.useEffect(() => {
@@ -122,7 +127,7 @@ export default function Home() {
             {/* Left Column: Text Content */}
             <div className="relative flex flex-col space-y-6 text-left h-full justify-center">
               <div className="relative z-10">
-                <h1 className="font-headline text-5xl font-bold tracking-tighter sm:text-6xl xl:text-8xl/none">
+                <h1 key={glitchKey} className="font-headline text-5xl font-bold tracking-tighter sm:text-6xl xl:text-8xl/none animate-glitch">
                   Nawaz Sayyad
                 </h1>
                 <p className="text-2xl text-accent font-medium tracking-wider">
