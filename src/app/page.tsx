@@ -145,31 +145,31 @@ export default function Home() {
             </div>
 
             {/* Right Column: Achievement Carousel */}
-            <div className="h-[450px] flex items-center justify-center relative">
+            <div className="h-[500px] flex items-center justify-center relative overflow-hidden">
                <div className="absolute w-full h-full flex items-center justify-center">
                     {isMounted && achievements.map((achievement, index) => {
                         const offset = (index - currentIndex + achievements.length) % achievements.length;
-                        let y = 0;
+                        let x = 0;
                         let scale = 0.8;
                         let opacity = 0.4;
                         if(offset === 0) { // prev
-                            y = -35;
+                            x = -50;
                             scale = 0.8;
                         } else if(offset === 1) { // current
-                            y = 0;
-                            scale = 1;
+                            x = 0;
+                            scale = 1.1; // Make it bigger
                             opacity = 1;
                         } else if(offset === 2) { // next
-                            y = 35;
+                            x = 50;
                             scale = 0.8;
                         } else {
-                            y = 35;
+                            x = 50;
                             scale = 0;
                             opacity = 0;
                         }
 
                         if(offset > 2) {
-                            y = 35;
+                            x = 50;
                             scale = 0.8;
                             opacity = 0;
                         }
@@ -177,9 +177,9 @@ export default function Home() {
                         return (
                             <div
                                 key={index}
-                                className="absolute w-[300px] transition-all duration-500 ease-in-out"
+                                className="absolute w-[350px] transition-all duration-700 ease-in-out"
                                 style={{
-                                    transform: `translateY(${y}%) scale(${scale})`,
+                                    transform: `translateX(${x}%) scale(${scale})`,
                                     opacity: opacity,
                                     zIndex: offset === 1 ? 10 : 1,
                                 }}
