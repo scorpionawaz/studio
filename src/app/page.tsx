@@ -68,21 +68,21 @@ export default function Home() {
           
           <div className="relative flex flex-col items-center justify-center space-y-4">
               {/* Orbiting Skills */}
-              <div className="absolute w-[500px] h-[500px] border-2 border-dashed border-accent/20 rounded-full animate-[spin_40s_linear_infinite]">
+              <div className="absolute w-[600px] h-[600px] border-2 border-dashed border-accent/20 rounded-full animate-[spin_60s_linear_infinite]">
                 {orbitingSkills.map((skill, index) => {
                   const angle = (index / orbitingSkills.length) * 360;
                   return (
                     <div
                       key={skill.name}
-                      className="absolute top-1/2 left-1/2 -m-6 flex flex-col items-center"
+                      className="absolute top-1/2 left-1/2 -m-12 flex flex-col items-center"
                       style={{
-                        transform: `rotate(${angle}deg) translate(250px) rotate(-${angle}deg)`,
+                        transform: `rotate(${angle}deg) translate(300px) rotate(-${angle}deg)`,
                       }}
                     >
-                      <div className="w-20 h-20 bg-secondary/80 backdrop-blur-sm rounded-full flex items-center justify-center border-2 border-accent/30 shadow-lg hover:border-accent transition-all hover:scale-110">
+                      <div className="w-24 h-24 bg-secondary/80 backdrop-blur-sm rounded-full flex items-center justify-center border-2 border-accent/30 shadow-lg hover:border-accent transition-all hover:scale-110">
                         <skill.icon size={skill.size} className="text-accent" />
                       </div>
-                      <span className="mt-2 text-xs font-semibold text-primary/80 bg-background/50 px-2 py-1 rounded-full">
+                      <span className="mt-2 text-sm font-semibold text-primary/80 bg-background/50 px-2 py-1 rounded-full">
                         {skill.name}
                       </span>
                     </div>
