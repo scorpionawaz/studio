@@ -21,8 +21,7 @@ export function generateStaticParams() {
 }
 
 export default function ProjectPage({ params }: ProjectPageProps) {
-  const resolvedParams = React.use(Promise.resolve(params));
-  const project = getProjectById(resolvedParams.id);
+  const project = getProjectById(params.id);
 
   if (!project) {
     notFound();
