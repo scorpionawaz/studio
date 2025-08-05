@@ -51,7 +51,7 @@ const IconRain = () => {
     }, []);
 
     return (
-        <div className="absolute inset-0 w-full h-full overflow-hidden">
+        <div className="absolute inset-0 w-full h-full overflow-hidden -z-10">
             {icons.map((icon) => (
                 <div
                     key={icon.id}
@@ -118,7 +118,7 @@ export default function Home() {
   }, [isMounted, achievements.length]);
 
   return (
-    <div className="flex flex-col min-h-screen relative">
+    <div className="flex flex-col min-h-screen">
        <IconRain />
        <KeyAchievements />
       <main className="flex-1">
