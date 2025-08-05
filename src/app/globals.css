@@ -152,16 +152,24 @@
 
 @keyframes corner-glow {
   0% {
-    transform: scale(1);
-    opacity: 0.5;
+    transform: translate(0, 0) scale(1);
+    opacity: 0.6;
   }
-  50% {
-    transform: scale(1.2);
+  25% {
+    transform: translate(20vw, 15vh) scale(1.1);
     opacity: 0.8;
   }
-  100% {
-    transform: scale(1);
+  50% {
+    transform: translate(5vw, 30vh) scale(0.9);
     opacity: 0.5;
+  }
+  75% {
+    transform: translate(25vw, -10vh) scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.6;
   }
 }
 
@@ -172,7 +180,7 @@
   border-radius: 50%;
   filter: blur(100px);
   z-index: -1;
-  animation: corner-glow 10s ease-in-out infinite;
+  animation: corner-glow 20s ease-in-out infinite;
 }
 
 .corner-glow-top-left {
@@ -180,12 +188,11 @@
   left: -15vmax;
   background: radial-gradient(circle, hsl(var(--primary) / 0.8), transparent 60%);
   animation-delay: 0s;
-
 }
 
 .corner-glow-bottom-right {
   bottom: -15vmax;
   right: -15vmax;
   background: radial-gradient(circle, hsl(var(--accent) / 0.8), transparent 60%);
-  animation-delay: -5s;
+  animation-delay: -10s;
 }
