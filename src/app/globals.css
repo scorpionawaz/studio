@@ -175,24 +175,24 @@
 
 .corner-glow {
   position: fixed;
-  width: 50vmax;
-  height: 50vmax;
+  width: 80vmax;
+  height: 80vmax;
   border-radius: 50%;
-  filter: blur(100px);
+  filter: blur(150px);
   z-index: -1;
   animation: corner-glow 20s ease-in-out infinite;
 }
 
 .corner-glow-top-left {
-  top: -15vmax;
-  left: -15vmax;
+  top: -25vmax;
+  left: -25vmax;
   background: radial-gradient(circle, hsl(var(--primary) / 0.8), transparent 60%);
   animation-delay: 0s;
 }
 
 .corner-glow-bottom-right {
-  bottom: -15vmax;
-  right: -15vmax;
+  bottom: -25vmax;
+  right: -25vmax;
   background: radial-gradient(circle, hsl(var(--accent) / 0.8), transparent 60%);
   animation-delay: -10s;
 }
