@@ -45,19 +45,23 @@ const KeyAchievements = () => {
   const [index, setIndex] = useState(0);
   const [animationClass, setAnimationClass] = useState("animate-fade-in-scale");
   const [showParticles, setShowParticles] = useState(false);
+  const [isGlitching, setIsGlitching] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setShowParticles(true);
+      setIsGlitching(false);
       setAnimationClass("animate-fade-out-scale");
 
-      setTimeout(() => setShowParticles(false), 500);
+      setTimeout(() => setShowParticles(false), 800);
 
       setTimeout(() => {
         setIndex((prevIndex) => (prevIndex + 1) % achievements.length);
         setAnimationClass("animate-fade-in-scale");
+        setIsGlitching(true);
         setShowParticles(true);
-        setTimeout(() => setShowParticles(false), 500);
+        setTimeout(() => setShowParticles(false), 800);
+        setTimeout(() => setIsGlitching(false), 400); // Duration of glitch animation
       }, 500);
     }, 5000);
 
@@ -69,7 +73,8 @@ const KeyAchievements = () => {
         <div 
             className={cn(
                 "text-center text-3xl font-headline font-bold text-foreground/90 uppercase",
-                animationClass
+                animationClass,
+                isGlitching && "animate-glitch"
             )}
         >
             <p>{achievements[index]}</p>
