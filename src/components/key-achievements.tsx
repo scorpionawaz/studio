@@ -49,19 +49,15 @@ const KeyAchievements = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setShowParticles(true);
-      setIsGlitching(false);
       setAnimationClass("animate-fade-out-scale");
-
-      setTimeout(() => setShowParticles(false), 800);
 
       setTimeout(() => {
         setIndex((prevIndex) => (prevIndex + 1) % achievements.length);
         setAnimationClass("animate-fade-in-scale");
-        setIsGlitching(true);
+        setIsGlitching(true); 
         setShowParticles(true);
         setTimeout(() => setShowParticles(false), 800);
-        setTimeout(() => setIsGlitching(false), 400); // Duration of glitch animation
+        setTimeout(() => setIsGlitching(false), 400);
       }, 500);
     }, 5000);
 
