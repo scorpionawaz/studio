@@ -72,7 +72,7 @@ const KeyAchievements = () => {
     <div className="w-full h-20 flex items-center justify-center overflow-hidden relative">
         <div 
             className={cn(
-                "text-center text-3xl font-headline font-bold text-foreground/90 uppercase",
+                "text-center text-4xl font-headline font-bold text-foreground/90 uppercase",
                 animationClass,
                 isGlitching && "animate-glitch"
             )}
