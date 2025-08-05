@@ -237,3 +237,22 @@
 .animate-fade-in-scale {
   animation: fade-in-scale 0.5s ease-in forwards;
 }
+
+@keyframes text-glow {
+  0%, 100% {
+    text-shadow: 
+        0 0 5px hsl(var(--accent) / 0.8),
+        0 0 10px hsl(var(--accent) / 0.6),
+        0 0 15px hsl(var(--accent) / 0.4);
+  }
+  50% {
+    text-shadow: 
+        0 0 10px hsl(var(--accent) / 1),
+        0 0 20px hsl(var(--accent) / 0.8),
+        0 0 30px hsl(var(--accent) / 0.6);
+  }
+}
+
+.animate-text-glow {
+  animation: text-glow 3s ease-in-out infinite;
+}

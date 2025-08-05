@@ -62,8 +62,8 @@ const KeyAchievements = () => {
         <div 
             key={animationKey}
             className={cn(
-                "text-center text-4xl font-headline font-bold text-foreground/90 uppercase",
-                "animate-fade-in-scale animate-glitch"
+                "text-center text-4xl font-headline font-bold text-foreground/90 uppercase animate-text-glow",
+                "animate-fade-in-scale"
             )}
         >
             <p>{achievements[index]}</p>
