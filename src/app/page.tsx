@@ -126,7 +126,7 @@ export default function Home() {
           <div className="container px-4 md:px-6 grid md:grid-cols-2 gap-16 items-center">
             {/* Left Column: Text Content */}
             <div className="flex flex-col space-y-6 text-left h-full justify-center">
-              <div className="relative z-10">
+              <div className="z-10">
                 <h1 key={glitchKey} className="font-headline text-5xl font-bold tracking-tighter sm:text-6xl xl:text-8xl/none animate-glitch text-accent">
                   Nawaz Sayyad
                 </h1>
