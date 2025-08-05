@@ -122,10 +122,10 @@ export default function Home() {
        <IconRain />
        <KeyAchievements />
       <main className="flex-1">
-        <section id="achievements" className="w-full h-[calc(100vh-80px)] flex items-center relative">
+        <section id="achievements" className="w-full h-[calc(100vh-80px)] flex items-center">
           <div className="container px-4 md:px-6 grid md:grid-cols-2 gap-16 items-center">
             {/* Left Column: Text Content */}
-            <div className="relative flex flex-col space-y-6 text-left h-full justify-center">
+            <div className="flex flex-col space-y-6 text-left h-full justify-center">
               <div className="relative z-10">
                 <h1 key={glitchKey} className="font-headline text-5xl font-bold tracking-tighter sm:text-6xl xl:text-8xl/none animate-glitch">
                   Nawaz Sayyad
