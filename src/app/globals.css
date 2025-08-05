@@ -150,20 +150,42 @@
   animation: subtle-glow 4s ease-in-out infinite;
 }
 
-@keyframes gradient-animation {
+@keyframes corner-glow {
   0% {
-    background-position: 0% 50%;
+    transform: scale(1);
+    opacity: 0.2;
   }
   50% {
-    background-position: 100% 50%;
+    transform: scale(1.2);
+    opacity: 0.3;
   }
   100% {
-    background-position: 0% 50%;
+    transform: scale(1);
+    opacity: 0.2;
   }
 }
 
-.bg-animated-gradient {
-  background: linear-gradient(-45deg, hsl(var(--background)), hsl(var(--primary)), #eab308, hsl(var(--background)));
-  background-size: 400% 400%;
-  animation: gradient-animation 15s ease infinite;
+.corner-glow {
+  position: fixed;
+  width: 40vmax;
+  height: 40vmax;
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: -1;
+  animation: corner-glow 10s ease-in-out infinite;
+}
+
+.corner-glow-top-left {
+  top: -20vmax;
+  left: -20vmax;
+  background: radial-gradient(circle, hsl(var(--primary) / 0.5), transparent 60%);
+  animation-delay: 0s;
+
+}
+
+.corner-glow-bottom-right {
+  bottom: -20vmax;
+  right: -20vmax;
+  background: radial-gradient(circle, hsl(var(--accent) / 0.5), transparent 60%);
+  animation-delay: -5s;
 }

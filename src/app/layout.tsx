@@ -26,11 +26,13 @@ export default function RootLayout({
     <html lang="en" className="dark scroll-smooth">
       <body
         className={cn(
-          "min-h-screen bg-transparent font-body antialiased bg-animated-gradient",
+          "min-h-screen font-body antialiased",
           inter.variable,
           spaceGrotesk.variable
         )}
       >
+        <div className="corner-glow corner-glow-top-left"></div>
+        <div className="corner-glow corner-glow-bottom-right"></div>
         <Header />
         <main className="flex-grow">{children}</main>
         <Footer />
