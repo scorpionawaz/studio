@@ -44,12 +44,17 @@ const Particles = ({ active }: { active: boolean }) => {
 const KeyAchievements = () => {
   const [index, setIndex] = useState(0);
   const [showParticles, setShowParticles] = useState(false);
-  const [animationKey, setAnimationKey] = useState(0);
+  const [animationClasses, setAnimationClasses] = useState("animate-fade-in-scale animate-text-glow");
 
   useEffect(() => {
     const interval = setInterval(() => {
         setIndex((prevIndex) => (prevIndex + 1) % achievements.length);
-        setAnimationKey(prevKey => prevKey + 1); // Re-trigger animation
+        
+        setAnimationClasses("animate-fade-in-scale animate-glitch animate-text-glow");
+        setTimeout(() => {
+            setAnimationClasses("animate-fade-in-scale animate-text-glow");
+        }, 400);
+
         setShowParticles(true);
         setTimeout(() => setShowParticles(false), 800);
     }, 5000);
@@ -60,10 +65,10 @@ const KeyAchievements = () => {
   return (
     <div className="w-full h-20 flex items-center justify-center overflow-hidden relative">
         <div 
-            key={animationKey}
+            key={index}
             className={cn(
-                "text-center text-4xl font-headline font-bold text-foreground/90 uppercase animate-text-glow",
-                "animate-fade-in-scale"
+                "text-center text-4xl font-headline font-bold text-foreground/90 uppercase",
+                animationClasses
             )}
         >
             <p>{achievements[index]}</p>
