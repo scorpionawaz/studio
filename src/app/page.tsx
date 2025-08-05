@@ -118,7 +118,7 @@ export default function Home() {
   }, [isMounted, achievements.length]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-background/95 relative">
+    <div className="flex flex-col min-h-screen relative">
        <IconRain />
        <KeyAchievements />
       <main className="flex-1">
