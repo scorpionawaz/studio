@@ -193,6 +193,6 @@
 .corner-glow-bottom-right {
   bottom: -25vmax;
   right: -25vmax;
-  background: radial-gradient(circle, hsl(45 93% 58% / 0.6), transparent 60%);
+  background: radial-gradient(circle, hsl(var(--accent) / 0.6), transparent 60%);
   animation-delay: -10s;
 }
